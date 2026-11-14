@@ -1,0 +1,41 @@
+{
+  "routes": [
+    {
+      "trail_id": "MORA_NISQUALLY_VISTA",
+      "display_name": "Nisqually Vista Trail",
+      "route_type": "Lollipop",
+      "official_distance_miles": 1.2,
+      "official_elevation_gain_ft": 200,
+      "official_duration_minutes": 45,
+      "official_source_url": "https://home.nps.gov/thingstodo/hike-nisqually-vista-trail.htm",
+      "geometry_source": "NPS NPMap MORA trail overlay",
+      "geometry_source_url": "https://carto.nps.gov/user/parktiles/api/v2/sql",
+      "geometry_id": "4449e5cf-2afe-4b10-8cbb-67dd6ee1da9c",
+      "validation_status": "provisional_open_loop",
+      "validation_note": "All four Nisqually Vista features in the official NPMap overlay are included as an unordered route-to-segment mapping. Endpoint topology finds one connected component but no closed cycle; the nearest pair of open loop endpoints is about 47 m apart. No traversal order or artificial connector is stored.",
+      "segments": [
+        {
+          "cartodb_id": 24680,
+          "source_objectid": "26240.0",
+          "current_feature_objectid": null
+        },
+        {
+          "cartodb_id": 24681,
+          "source_objectid": "26257.0",
+          "current_feature_objectid": null
+        },
+        {
+          "cartodb_id": 24679,
+          "source_objectid": "26228.0",
+          "current_feature_objectid": null
+        },
+        {
+          "cartodb_id": 24682,
+          "source_objectid": "26274.0",
+          "current_feature_objectid": 14771
+        }
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,30 @@
+trail_id,route_name,objectid,trail_name,geometry_type,geometry_length_miles,endpoint_gap_meters,closed_within_15m
+MORA_NISQUALLY_VISTA,Nisqually Vista Trail,14771,Nisqually Vista Trail,LineString,0.0779,115.5,False
+MORA_NACHES_PEAK_LOOP,Naches Peak Loop Trail,15051,Tipsoo Lake Trail,LineString,0.0093,14.8,True
+MORA_NACHES_PEAK_LOOP,Naches Peak Loop Trail,15566,Tipsoo Lake Trail,LineString,0.0057,9.2,True
+MORA_NACHES_PEAK_LOOP,Naches Peak Loop Trail,15701,Naches Loop Trail,LineString,1.4088,1725.5,False
+MORA_NACHES_PEAK_LOOP,Naches Peak Loop Trail,15871,Tipsoo Lake Trail,LineString,0.0086,13.8,True
+MORA_NACHES_PEAK_LOOP,Naches Peak Loop Trail,16484,Tipsoo Lake Trail,LineString,0.0176,27.6,False
+MORA_NACHES_PEAK_LOOP,Naches Peak Loop Trail,17324,Tipsoo Lake Trail,LineString,0.0034,5.4,True
+MORA_NACHES_PEAK_LOOP,Naches Peak Loop Trail,17850,Tipsoo Lake Trail,LineString,0.0123,19.7,False
+MORA_NACHES_PEAK_LOOP,Naches Peak Loop Trail,18206,Tipsoo Lake Trail,LineString,0.0105,16.9,False
+MORA_NACHES_PEAK_LOOP,Naches Peak Loop Trail,18730,Tipsoo Lake Trail,LineString,0.0446,69.2,False
+MORA_NACHES_PEAK_LOOP,Naches Peak Loop Trail,18896,Tipsoo Lake Trail,LineString,0.0123,19.3,False
+MORA_NACHES_PEAK_LOOP,Naches Peak Loop Trail,19537,Tipsoo Lake Trail,LineString,0.02,31.7,False
+MORA_NACHES_PEAK_LOOP,Naches Peak Loop Trail,19624,Tipsoo Lake Trail,LineString,0.0078,12.6,True
+MORA_NACHES_PEAK_LOOP,Naches Peak Loop Trail,19880,Tipsoo Lake Trail,LineString,0.0255,41.0,False
+MORA_NACHES_PEAK_LOOP,Naches Peak Loop Trail,20527,Tipsoo Lake Trail,LineString,0.049,76.0,False
+MORA_NACHES_PEAK_LOOP,Naches Peak Loop Trail,20961,Tipsoo Lake Trail,LineString,0.1103,172.9,False
+MORA_NACHES_PEAK_LOOP,Naches Peak Loop Trail,21293,Tipsoo Lake Trail,LineString,0.0131,20.8,False
+MORA_NACHES_PEAK_LOOP,Naches Peak Loop Trail,21442,Tipsoo Lake Trail,LineString,0.0221,34.2,False
+MORA_NACHES_PEAK_LOOP,Naches Peak Loop Trail,22108,Naches Loop Trail,LineString,0.0082,12.7,True
+MORA_NACHES_PEAK_LOOP,Naches Peak Loop Trail,22300,Tipsoo Lake Trail,LineString,0.0277,43.5,False
+MORA_NACHES_PEAK_LOOP,Naches Peak Loop Trail,22376,Tipsoo Lake Trail,LineString,0.0213,34.1,False
+MORA_NACHES_PEAK_LOOP,Naches Peak Loop Trail,22557,Tipsoo Lake Trail,LineString,0.1067,151.0,False
+MORA_SKYLINE_LOOP,Skyline Trail Loop,15017,Skyline Trail,LineString,0.3798,357.7,False
+MORA_SKYLINE_LOOP,Skyline Trail Loop,15110,High Skyline Trail,LineString,0.0302,46.5,False
+MORA_SKYLINE_LOOP,Skyline Trail Loop,15982,Golden Gate Trail,LineString,0.9447,1059.5,False
+MORA_SKYLINE_LOOP,Skyline Trail Loop,16208,Skyline Trail,LineString,0.1813,204.5,False
+MORA_SKYLINE_LOOP,Skyline Trail Loop,17924,Skyline Trail,LineString,0.0033,5.4,True
+MORA_SKYLINE_LOOP,Skyline Trail Loop,21028,Skyline Trail,LineString,0.0099,15.9,False
+MORA_SKYLINE_LOOP,Skyline Trail Loop,21551,Fourth Crossing Trail,LineString,0.2458,354.3,False

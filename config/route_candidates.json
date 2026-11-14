@@ -1,0 +1,39 @@
+{
+  "routes": [
+    {
+      "trail_id": "MORA_NISQUALLY_VISTA",
+      "display_name": "Nisqually Vista Trail",
+      "color": "#d73027",
+      "neighborhood_radius_meters": 1500,
+      "candidate_names": [
+        "Nisqually Vista Trail"
+      ]
+    },
+    {
+      "trail_id": "MORA_NACHES_PEAK_LOOP",
+      "display_name": "Naches Peak Loop Trail",
+      "color": "#4575b4",
+      "neighborhood_radius_meters": 1500,
+      "candidate_names": [
+        "Naches Loop Trail",
+        "Tipsoo Lake Trail",
+        "Pacific Crest Trail",
+        "Pacific Crest National Scenic Trail"
+      ]
+    },
+    {
+      "trail_id": "MORA_SKYLINE_LOOP",
+      "display_name": "Skyline Trail Loop",
+      "color": "#7b3294",
+      "neighborhood_radius_meters": 2200,
+      "candidate_names": [
+        "Skyline Trail",
+        "High Skyline Trail",
+        "Golden Gate Trail",
+        "Fourth Crossing Trail",
+        "4th Crossing Trail"
+      ]
+    }
+  ]
+}
+

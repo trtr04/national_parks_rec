@@ -1,0 +1,143 @@
+{
+  "park_code": "MORA",
+  "last_verified": "2026-11-13",
+  "attribute_source": "Distance, elevation gain, and hiking time were read by hand from the NPS 'Things to Do' page named in nps_title. estimated_hours is the midpoint when NPS gives a range.",
+  "hero_photo_title": "Mount Rainier from Aurora Lake",
+  "trails": [
+    {
+      "trail_id": "MORA_NISQUALLY_VISTA",
+      "trail_name": "Nisqually Vista Trail",
+      "nps_title": "Hike Nisqually Vista Trail",
+      "area": "Paradise",
+      "route_type": "Lollipop",
+      "distance_miles": 1.2,
+      "elevation_gain_ft": 200,
+      "estimated_hours": 0.9,
+      "scenery_tags": ["mountain_views", "wildflowers", "forests"],
+      "photo_places": [
+        "Nisqually Vista Walking Tour: Nisqually Vista",
+        "Nisqually Vista Walking Tour: Meadow Life",
+        "Nisqually Vista Trailhead"
+      ]
+    },
+    {
+      "trail_id": "MORA_NACHES_PEAK_LOOP",
+      "trail_name": "Naches Peak Loop",
+      "nps_title": "Explore Tipsoo Lake",
+      "area": "Tipsoo Lake / Chinook Pass",
+      "route_type": "Loop",
+      "distance_miles": 3.4,
+      "elevation_gain_ft": 500,
+      "estimated_hours": 2.0,
+      "nps_duration_text": "2 hours",
+      "scenery_tags": ["lakes", "wildflowers", "mountain_views"],
+      "designation": "Pacific Crest National Scenic Trail (section)",
+      "summary": "A 3.4-mile loop from Tipsoo Lake with 500 feet of elevation gain.",
+      "description_anchor": "Naches Peak Loop:",
+      "attribute_note": "The NPS page covers the whole Tipsoo Lake area; these figures are the ones it gives for the Naches Peak Loop.",
+      "photo_places": []
+    },
+    {
+      "trail_id": "MORA_SILVER_FALLS",
+      "trail_name": "Silver Falls Loop",
+      "nps_title": "Hike to Silver Falls",
+      "area": "Ohanapecosh",
+      "route_type": "Loop",
+      "distance_miles": 3.0,
+      "elevation_gain_ft": 500,
+      "estimated_hours": 2.0,
+      "scenery_tags": ["waterfalls", "forests"],
+      "photo_places": ["Silver Falls", "Silver Falls Trailhead"]
+    },
+    {
+      "trail_id": "MORA_BENCH_SNOW_LAKES",
+      "trail_name": "Bench and Snow Lakes",
+      "nps_title": "Hike to Bench and Snow Lakes",
+      "area": "Stevens Canyon",
+      "route_type": "Out-and-back",
+      "distance_miles": 2.5,
+      "elevation_gain_ft": 700,
+      "estimated_hours": 2.0,
+      "scenery_tags": ["lakes", "mountain_views"],
+      "trailhead_place": "Bench and Snow Lake Trailhead",
+      "photo_places": ["Bench and Snow Lake Trailhead"]
+    },
+    {
+      "trail_id": "MORA_EMMONS_MORAINE",
+      "trail_name": "Emmons Moraine Trail",
+      "nps_title": "Hike Emmons Moraine Trail",
+      "area": "White River",
+      "route_type": "Out-and-back",
+      "distance_miles": 3.0,
+      "elevation_gain_ft": 600,
+      "estimated_hours": 1.5,
+      "scenery_tags": ["mountain_views", "lakes", "forests"],
+      "photo_places": ["Emmons Glacier", "Glacier Basin Trailhead"]
+    },
+    {
+      "trail_id": "MORA_SPRAY_FALLS",
+      "trail_name": "Spray Falls",
+      "nps_title": "Hike to Spray Falls",
+      "area": "Mowich Lake",
+      "route_type": "Out-and-back",
+      "distance_miles": 4.0,
+      "elevation_gain_ft": 545,
+      "estimated_hours": 3.0,
+      "scenery_tags": ["waterfalls", "lakes", "mountain_views"],
+      "photo_places": ["Mowich Lake"]
+    },
+    {
+      "trail_id": "MORA_RAMPART_RIDGE",
+      "trail_name": "Rampart Ridge Loop",
+      "nps_title": "Hike Rampart Ridge",
+      "area": "Longmire",
+      "route_type": "Loop",
+      "distance_miles": 4.6,
+      "elevation_gain_ft": 1339,
+      "estimated_hours": 2.5,
+      "scenery_tags": ["mountain_views", "forests"],
+      "photo_places": []
+    },
+    {
+      "trail_id": "MORA_BURROUGHS_MOUNTAIN",
+      "trail_name": "Burroughs Mountain (to First Burroughs)",
+      "nps_title": "Hike to Burroughs Mountain",
+      "area": "Sunrise",
+      "route_type": null,
+      "distance_miles": 4.7,
+      "elevation_gain_ft": 900,
+      "estimated_hours": 4.5,
+      "scenery_tags": ["mountain_views"],
+      "attribute_note": "Distance and gain are for First Burroughs. NPS gives one 3-6 hour range covering both First and Second Burroughs (7 miles, 1,150 feet), so the time shown is the midpoint of that range.",
+      "photo_places": []
+    },
+    {
+      "trail_id": "MORA_SHRINER_PEAK",
+      "trail_name": "Shriner Peak Fire Lookout",
+      "nps_title": "Hike to Shriner Peak Fire Lookout",
+      "area": "Ohanapecosh",
+      "route_type": "Out-and-back",
+      "distance_miles": 8.0,
+      "elevation_gain_ft": 3434,
+      "estimated_hours": 5.0,
+      "nps_duration_text": "About 5 hours",
+      "scenery_tags": ["mountain_views", "wildflowers"],
+      "photo_places": ["Shriner Peak Fire Lookout"]
+    },
+    {
+      "trail_id": "MORA_GOBBLERS_KNOB",
+      "trail_name": "Gobblers Knob Fire Lookout",
+      "nps_title": "Hike to Gobblers Knob Fire Lookout",
+      "area": "Westside Road",
+      "route_type": "Out-and-back",
+      "distance_miles": 11.2,
+      "elevation_gain_ft": 2585,
+      "estimated_hours": 6.5,
+      "scenery_tags": ["mountain_views", "lakes"],
+      "photo_places": [
+        "Gobblers Knob Fire Lookout",
+        "Lake George & Gobblers Knob Trailhead"
+      ]
+    }
+  ]
+}

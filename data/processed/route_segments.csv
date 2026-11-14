@@ -1,0 +1,5 @@
+trail_id,source,source_cartodb_id,source_objectid,source_geometry_id,current_feature_objectid,segment_geometry_miles,validation_status
+MORA_NISQUALLY_VISTA,NPS NPMap MORA trail overlay,24680,26240.0,4449e5cf-2afe-4b10-8cbb-67dd6ee1da9c,,0.0201,provisional_open_loop
+MORA_NISQUALLY_VISTA,NPS NPMap MORA trail overlay,24681,26257.0,4449e5cf-2afe-4b10-8cbb-67dd6ee1da9c,,0.2328,provisional_open_loop
+MORA_NISQUALLY_VISTA,NPS NPMap MORA trail overlay,24679,26228.0,4449e5cf-2afe-4b10-8cbb-67dd6ee1da9c,,0.408,provisional_open_loop
+MORA_NISQUALLY_VISTA,NPS NPMap MORA trail overlay,24682,26274.0,4449e5cf-2afe-4b10-8cbb-67dd6ee1da9c,14771,0.078,provisional_open_loop

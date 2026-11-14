@@ -1,0 +1,45 @@
+{
+  "trail_id": "MORA_NISQUALLY_VISTA",
+  "validation_status": "provisional_open_loop",
+  "geometry_verified": false,
+  "official_distance_miles": 1.2,
+  "unique_geometry_miles": 0.7388,
+  "topology": {
+    "tolerance_meters": 15.0,
+    "edge_count": 4,
+    "node_count": 5,
+    "connected_component_count": 1,
+    "open_endpoint_count": 3,
+    "open_endpoints": [
+      [
+        -121.741674,
+        46.785013
+      ],
+      [
+        -121.746017,
+        46.78627
+      ],
+      [
+        -121.745654,
+        46.786614
+      ]
+    ],
+    "cycle_rank": 0,
+    "nearest_open_endpoint_pair": {
+      "left": [
+        -121.746017,
+        46.78627
+      ],
+      "right": [
+        -121.745654,
+        46.786614
+      ],
+      "gap_meters": 47.19110528416684
+    }
+  },
+  "npmap_segments_used": 4,
+  "current_feature_segments_available": 1,
+  "validation_note": "All four Nisqually Vista features in the official NPMap overlay are included as an unordered route-to-segment mapping. Endpoint topology finds one connected component but no closed cycle; the nearest pair of open loop endpoints is about 47 m apart. No traversal order or artificial connector is stored.",
+  "official_source_url": "https://home.nps.gov/thingstodo/hike-nisqually-vista-trail.htm",
+  "geometry_source_url": "https://carto.nps.gov/user/parktiles/api/v2/sql"
+}

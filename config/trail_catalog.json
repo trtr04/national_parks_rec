@@ -13,12 +13,21 @@
       "distance_miles": 1.2,
       "elevation_gain_ft": 200,
       "estimated_hours": 0.9,
-      "scenery_tags": ["mountain_views", "wildflowers", "forests"],
+      "scenery_tags": [
+        "mountain_views",
+        "wildflowers",
+        "forests"
+      ],
       "photo_places": [
         "Nisqually Vista Walking Tour: Nisqually Vista",
         "Nisqually Vista Walking Tour: Meadow Life",
         "Nisqually Vista Trailhead"
-      ]
+      ],
+      "route": {
+        "segments": [
+          44563
+        ]
+      }
     },
     {
       "trail_id": "MORA_NACHES_PEAK_LOOP",
@@ -30,12 +39,30 @@
       "elevation_gain_ft": 500,
       "estimated_hours": 2.0,
       "nps_duration_text": "2 hours",
-      "scenery_tags": ["lakes", "wildflowers", "mountain_views"],
+      "scenery_tags": [
+        "lakes",
+        "wildflowers",
+        "mountain_views"
+      ],
       "designation": "Pacific Crest National Scenic Trail (section)",
       "summary": "A 3.4-mile loop from Tipsoo Lake with 500 feet of elevation gain.",
       "description_anchor": "Naches Peak Loop:",
       "attribute_note": "The NPS page covers the whole Tipsoo Lake area; these figures are the ones it gives for the Naches Peak Loop.",
-      "photo_places": []
+      "photo_places": [],
+      "route": {
+        "segments": [
+          43602,
+          44590,
+          43601,
+          43600,
+          43603,
+          44650,
+          44631,
+          44630,
+          44539
+        ],
+        "note": "Combines the Naches Loop trail, a Pacific Crest Trail section, and short connectors at Tipsoo Lake."
+      }
     },
     {
       "trail_id": "MORA_SILVER_FALLS",
@@ -46,8 +73,23 @@
       "distance_miles": 3.0,
       "elevation_gain_ft": 500,
       "estimated_hours": 2.0,
-      "scenery_tags": ["waterfalls", "forests"],
-      "photo_places": ["Silver Falls", "Silver Falls Trailhead"]
+      "scenery_tags": [
+        "waterfalls",
+        "forests"
+      ],
+      "photo_places": [
+        "Silver Falls",
+        "Silver Falls Trailhead"
+      ],
+      "route": {
+        "segments": [
+          43830,
+          43831,
+          43832,
+          43833
+        ],
+        "note": "The source has no trail segment through the Ohanapecosh Campground, so the loop shows a gap there."
+      }
     },
     {
       "trail_id": "MORA_BENCH_SNOW_LAKES",
@@ -58,9 +100,21 @@
       "distance_miles": 2.5,
       "elevation_gain_ft": 700,
       "estimated_hours": 2.0,
-      "scenery_tags": ["lakes", "mountain_views"],
+      "scenery_tags": [
+        "lakes",
+        "mountain_views"
+      ],
       "trailhead_place": "Bench and Snow Lake Trailhead",
-      "photo_places": ["Bench and Snow Lake Trailhead"]
+      "photo_places": [
+        "Bench and Snow Lake Trailhead"
+      ],
+      "route": {
+        "segments": [
+          43630,
+          43629,
+          43853
+        ]
+      }
     },
     {
       "trail_id": "MORA_EMMONS_MORAINE",
@@ -71,8 +125,30 @@
       "distance_miles": 3.0,
       "elevation_gain_ft": 600,
       "estimated_hours": 1.5,
-      "scenery_tags": ["mountain_views", "lakes", "forests"],
-      "photo_places": ["Emmons Glacier", "Glacier Basin Trailhead"]
+      "scenery_tags": [
+        "mountain_views",
+        "lakes",
+        "forests"
+      ],
+      "photo_places": [
+        "Emmons Glacier",
+        "Glacier Basin Trailhead"
+      ],
+      "route": {
+        "segments": [
+          {
+            "objectid": 44599,
+            "clip": [
+              -121.6652,
+              46.88,
+              -121.64,
+              46.92
+            ]
+          },
+          44600
+        ],
+        "note": "Includes the first part of the Glacier Basin Trail from White River Campground to the Emmons Moraine junction."
+      }
     },
     {
       "trail_id": "MORA_SPRAY_FALLS",
@@ -83,8 +159,20 @@
       "distance_miles": 4.0,
       "elevation_gain_ft": 545,
       "estimated_hours": 3.0,
-      "scenery_tags": ["waterfalls", "lakes", "mountain_views"],
-      "photo_places": ["Mowich Lake"]
+      "scenery_tags": [
+        "waterfalls",
+        "lakes",
+        "mountain_views"
+      ],
+      "photo_places": [
+        "Mowich Lake"
+      ],
+      "route": {
+        "segments": [
+          44532,
+          44531
+        ]
+      }
     },
     {
       "trail_id": "MORA_RAMPART_RIDGE",
@@ -95,8 +183,21 @@
       "distance_miles": 4.6,
       "elevation_gain_ft": 1339,
       "estimated_hours": 2.5,
-      "scenery_tags": ["mountain_views", "forests"],
-      "photo_places": []
+      "scenery_tags": [
+        "mountain_views",
+        "forests"
+      ],
+      "photo_places": [],
+      "route": {
+        "segments": [
+          44574,
+          44569,
+          44571,
+          44584,
+          44575
+        ],
+        "note": "Combines the Rampart Ridge trail, a Wonderland Trail section, and part of the Trail of the Shadows."
+      }
     },
     {
       "trail_id": "MORA_BURROUGHS_MOUNTAIN",
@@ -107,9 +208,22 @@
       "distance_miles": 4.7,
       "elevation_gain_ft": 900,
       "estimated_hours": 4.5,
-      "scenery_tags": ["mountain_views"],
+      "scenery_tags": [
+        "mountain_views"
+      ],
       "attribute_note": "Distance and gain are for First Burroughs. NPS gives one 3-6 hour range covering both First and Second Burroughs (7 miles, 1,150 feet), so the time shown is the midpoint of that range.",
-      "photo_places": []
+      "photo_places": [],
+      "route": {
+        "segments": [
+          44530,
+          44655,
+          43874,
+          43871,
+          43911,
+          44535
+        ],
+        "note": "From Sunrise along Sourdough Ridge to Frozen Lake, then up to First Burroughs."
+      }
     },
     {
       "trail_id": "MORA_SHRINER_PEAK",
@@ -121,8 +235,19 @@
       "elevation_gain_ft": 3434,
       "estimated_hours": 5.0,
       "nps_duration_text": "About 5 hours",
-      "scenery_tags": ["mountain_views", "wildflowers"],
-      "photo_places": ["Shriner Peak Fire Lookout"]
+      "scenery_tags": [
+        "mountain_views",
+        "wildflowers"
+      ],
+      "photo_places": [
+        "Shriner Peak Fire Lookout"
+      ],
+      "route": {
+        "segments": [
+          44548,
+          43851
+        ]
+      }
     },
     {
       "trail_id": "MORA_GOBBLERS_KNOB",
@@ -133,11 +258,29 @@
       "distance_miles": 11.2,
       "elevation_gain_ft": 2585,
       "estimated_hours": 6.5,
-      "scenery_tags": ["mountain_views", "lakes"],
+      "scenery_tags": [
+        "mountain_views",
+        "lakes"
+      ],
       "photo_places": [
         "Gobblers Knob Fire Lookout",
         "Lake George & Gobblers Knob Trailhead"
-      ]
+      ],
+      "route": {
+        "segments": [
+          43852,
+          44559,
+          44557,
+          44581
+        ],
+        "note": "Only the trail section is drawn. The walk along Westside Road to the trail start is not in the source data."
+      }
     }
-  ]
+  ],
+  "route_source": {
+    "name": "Washington State Trails Database v2.0 (WA Recreation and Conservation Office)",
+    "url": "https://trails-wa-rco.hub.arcgis.com/pages/data-download",
+    "raw_file": "data/raw/wa_rco_trails_mora.geojson",
+    "note": "Segments are listed by OBJECTID and were chosen by hand from trail names and shared endpoints. A segment may carry a clip box [west, south, east, north] to keep only part of a longer trail."
+  }
 }

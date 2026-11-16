@@ -1,10 +1,10 @@
 # ParkMatch — National Park & Hiking Trail Discovery
 
 **Product Requirements Document (PRD)**  
-**Version:** 0.3 (working draft)  
-**Last updated:** November 13, 2026  
+**Version:** 0.4 (working draft)  
+**Last updated:** November 15, 2026  
 **Team:** Three members; Tracy leads the Hiking Trails / Trail Discovery & Recommendation component  
-**Current status:** A working local Streamlit prototype covers 10 Mount Rainier hikes with top-three matching, a clickable map, and photo galleries. Only one route has a line on the map, and it is provisional; trail attributes, scenery tags, and photos still need human review. Not deployed; no user testing yet
+**Current status:** A working local Streamlit prototype covers 10 Mount Rainier hikes with top-three matching, a clickable map, and photo galleries. All 10 hikes now have a route line on the map, each provisional and not yet checked against the official NPS map; trail attributes, scenery tags, and photos still need human review. Not deployed; no user testing yet
 
 > **Status key:** ✅ Completed or confirmed · 🟡 Explored, attempted, or partially complete · ⬜ Planned. A discussed feature is **not** an implemented feature. Illustrative figures and proposed structures should not be presented as verified results.
 
@@ -127,15 +127,16 @@ Built on November 13, 2026. Run it with `streamlit run app.py`; rebuild the data
 - **Difficulty:** derived by the draft rule in section 6.1. It yields 1 Easy, 7 Moderate, and 2 Hard, so an "Easy" search returns a single trail.
 - **Scenery tags:** assigned by judgment from keywords in the NPS descriptions; not yet reviewed.
 - **Photos:** 22 records in `trail_photos.csv` from the NPS API (`/thingstodo` and `/places`). A photo is marked `approved` and `public_domain` automatically when its credit starts with "NPS Photo"; 21 qualify and 1 is held as a `candidate`. No person has reviewed each image or its rights. Images load from NPS servers; no local copies are stored.
-- **Map:** OpenStreetMap tiles with one marker per trail at the location NPS lists. Only Nisqually Vista has a route line, drawn dashed as provisional. The other nine show a "route not mapped yet" note.
+- **Route lines (added November 15, 2026):** all 10 hikes have a line built from the Washington State Trails Database v2.0. The segments for each hike were picked by hand and are listed by `OBJECTID` in `config/trail_catalog.json`. Every line is one connected piece and is marked `provisional_name_match`; none is verified. `data/processed/route_checks.csv` compares each line with the official distance: five are within 10%, Silver Falls is 15% short (gap through the campground), Emmons Moraine is 28% long, Gobblers Knob covers only the trail section and not the Westside Road walk, and Nisqually Vista and Burroughs have no simple comparison.
+- **Map:** USGS topographic base map (OpenStreetMap as an option) with every route colored by difficulty, a legend, and a dot at the location NPS lists for each hike.
 - **Recommender:** `src/parkmatch/recommender.py` filters, scores, and explains as described in section 6.1.
-- **Interface:** preference controls, up to three match cards with reasons, a list of excluded trails with reasons, the map with a detail panel and gallery, a grid of all trails, and a park section with entrance fees.
-- **Checks:** 12 automated tests pass (difficulty boundaries, filtering, missing values, repeatable ranking, no-match case, and table joins). The filter, card buttons, whole-park view, and map-marker click were exercised by hand in a browser.
-- **Known gaps:** the "current conditions" link follows the standard NPS address pattern and has not been opened to confirm it; choosing a trail from the all-trails grid does not scroll back to the map; the API fetch uses the shared `DEMO_KEY` unless `NPS_API_KEY` is set.
+- **Interface:** a home page with preference controls, up to three match cards with reasons, a list of excluded trails with reasons, the park-wide trail map, a grid of all trails, and a park section with entrance fees. Clicking a route line, a dot, or a card opens that trail's own page (address `?trail=<trail_id>`), which has a larger map with the route highlighted, photos, stats, NPS notices, and links.
+- **Checks:** 14 automated tests pass (difficulty boundaries, filtering, missing values, repeatable ranking, no-match case, table joins, line clipping, and one connected route per trail). Opening a trail page from a route line and from a card, the back button, and keeping preferences across pages were exercised by hand in a browser.
+- **Known gaps:** the "current conditions" link follows the standard NPS address pattern and has not been opened to confirm it; the API fetch uses the shared `DEMO_KEY` unless `NPS_API_KEY` is set.
 
 ### 3.6 Not yet completed ⬜
 
-- Verified geometry for any route, and route lines for the nine hikes that currently show only a marker.
+- Verified geometry for any route: each of the 10 provisional lines still has to be compared with the official NPS map.
 - A second-person check of trail attributes and scenery tags, and a human review of each photo and its rights.
 - Local resized photo copies as a fallback for broken remote links.
 - Budget input, deployment, and integration with the park-level module.
@@ -149,6 +150,8 @@ Built on November 13, 2026. Run it with `streamlit run app.py`; rebuild the data
 | Complete hike descriptions, distances, timing, scenic features | [Mount Rainier Day Hiking](https://www.nps.gov/mora/planyourvisit/day-hiking-at-mount-rainier.htm) and official trail pages | Manually verify `trails.csv` | Hiking itineraries differ from GIS line segments; leave unavailable fields null. |
 | Trail line geometries | [NPS Public Trails Geographic Feature Layer](https://mapservices.nps.gov/arcgis/rest/services/NationalDatasets/NPS_Public_Trails_Geographic/FeatureServer/0?f=pjson) | Query selected `MORA` geometries with `returnGeometry=true` | Validate line-to-route correspondence and coordinate system. |
 | Trail descriptions, duration, trailhead point, and photos as structured data | NPS API `/thingstodo` endpoint filtered to `parkCode=mora` (same API and key as the park data) | Draft `trails.csv` rows and `trail_photos.csv` candidate rows by script, then verify by hand | Distance and elevation gain are usually in free text and need manual checking; gives a point, not a route line; not every listed activity is a hike. |
+| Route lines for Washington parks | [Washington State Trails Database v2.0](https://trails-wa-rco.hub.arcgis.com/pages/data-download) (WA Recreation and Conservation Office), queried through its public feature service | Source of the app's route lines; segments are chosen by hand per hike | Washington only. Publisher states it is for information, not navigation. Its `segment_length_mi` field reads about 46% long at this latitude, so lengths are measured from coordinates instead. No difficulty or direction data. |
+| Base map | USGS The National Map topographic tiles | Default map background | Public U.S. government tiles; maximum zoom 16. |
 | Secondary GIS reference | [USGS National Digital Trails](https://www.usgs.gov/national-digital-trails/data) | Cross-check where useful | Not guaranteed to provide complete, named hiking itineraries. |
 | Zoomable basemap | OpenStreetMap tiles or another approved basemap provider | Load on demand in the map interface | Follow attribution and tile use policies; do not download a whole static park map. |
 | Optional park boundary | NPS official polygon boundary layers | Add park outline to map if useful | Not required for the MVP. |
@@ -295,12 +298,12 @@ national_parks_rec/
 
 ## 7. Map, Detail Panel, and Photo Gallery
 
-- Center the initial map on Mount Rainier and display only validated routes for the chosen park.
+- Show one park-wide map with every catalog route colored by difficulty and a legend. Clicking a route opens that trail's page.
 - Support panning, zooming, clicking or selecting a route, highlighting it, and opening its details by `trail_id`.
 - Display trail name, distance, estimated time, difficulty, elevation gain where available, scenery tags, and the official source.
 - Include a prominent **Check current NPS conditions** link rather than claiming live access status without verification.
 - Display at most three approved, correctly attributed photos per route (the cover image on the recommendation card, the rest in the detail panel); handle missing photos gracefully.
-- Draw routes whose geometry is not yet verified with a distinct style (for example a dashed line) and a visible "provisional geometry" note.
+- Show a visible "provisional" notice for routes whose geometry is not yet verified. (The prototype draws all lines solid and states this in the map caption and on each trail page, because dashes were unreadable at park scale.)
 - Use GeoPandas/Shapely for geometry preparation and Folium with Streamlit or `streamlit-folium` for the initial UI; consider MapLibre only if requirements justify a more complex frontend.
 - Do not render the full nationwide GIS segment network on the first map load.
 
@@ -337,14 +340,14 @@ national_parks_rec/
 | P3 — Integrated MVP | Expand toward 10–15 routes and connect team modules | Working, presentable end-to-end Streamlit application. |
 | P4 — Validation and documentation | Testing, refinement, final explanation | Critical workflows pass and limitations are explicitly disclosed. |
 
-**Status as of November 13, 2026:** P0 is partly met: the four datasets join by `trail_id` for 10 routes, but only one route has a line and it is not verified. P1 and P2 work in the local prototype, with markers standing in for the nine missing route lines. P3 has reached 10 routes but is not integrated with teammates' modules or deployed. P4 has automated tests only.
+**Status as of November 15, 2026:** P0 is partly met: the four datasets join by `trail_id` for 10 routes and each has a line, but no line is verified. P1 and P2 work in the local prototype. P3 has reached 10 routes but is not integrated with teammates' modules or deployed. P4 has automated tests only.
 
 ## 10. Immediate Next Steps
 
 1. Have a second person check each trail's distance, gain, time, and scenery tags in `config/trail_catalog.json` against its NPS page.
 2. Review every photo and its credit, and decide what to do with the one held as a candidate.
 3. Agree on the difficulty rule as a team, since it currently leaves only one Easy trail.
-4. Close the Nisqually Vista loop gap, then map route lines for Naches Peak Loop and the other hikes, in order of how often they are recommended.
+4. Compare each provisional route line with the official NPS map, fix the known differences (Silver Falls gap, Emmons Moraine length, Gobblers Knob road section), and mark lines verified one by one.
 5. Open the "current conditions" link to confirm it, and correct it if needed.
 6. Get a personal NPS API key and set `NPS_API_KEY`.
 7. Hand the prototype to the frontend and park-level owners to agree how the modules connect.
@@ -356,7 +359,7 @@ national_parks_rec/
 - Should budget actively influence the demo? Only if assumptions are transparent and underlying data are dependable.
 - Is the draft difficulty rule in section 6.1 acceptable, or should the Easy thresholds be loosened so more than one trail qualifies? (Routes with missing ascent or time are currently excluded.)
 - Which map/tile provider supports the intended deployment and attribution requirements?
-- How many of the 10 prototype routes can get a verified route line within the schedule, and is a marker-only display acceptable for the rest?
+- How many of the 10 provisional route lines can be verified within the schedule, and is showing unverified lines with a notice acceptable for the demo?
 - Should Skyline Trail be added by hand even though the NPS API has no dedicated record for it?
 
 ---

@@ -6,11 +6,13 @@ Run with:  streamlit run app.py
 from __future__ import annotations
 
 from html import escape
+from math import cos, log2, radians
 from pathlib import Path
 import sys
 
 import folium
 import streamlit as st
+import streamlit.components.v1 as components
 from streamlit_folium import st_folium
 
 
@@ -43,6 +45,13 @@ START_CITIES = {  # (longitude, latitude)
 }
 LEVEL_COLORS = {"Easy": "#7cc15a", "Moderate": "#2d7aa8", "Hard": "#14361f"}
 SUN = "#ffd84a"
+LINE_COLORS = {"Easy": "#4fa62f", "Moderate": "#2d7aa8", "Hard": "#14361f"}
+PREF_DEFAULTS = {
+    "pref_city": "Seattle",
+    "pref_level": "Moderate",
+    "pref_time": "2_to_4",
+    "pref_scenery": ["mountain_views"],
+}
 
 CSS = """
 <style>
@@ -149,6 +158,23 @@ header[data-testid="stHeader"], footer { display: none; }
 .pm-park a { color: var(--sun); font-weight: 700; }
 .pm-park-photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; margin-top: 1rem; }
 .pm-footer { color: #4d6655; font-size: .8rem; margin-top: 1.2rem; }
+.pm-map-legend {
+  position: relative; z-index: 5; width: max-content; top: 12px;
+  margin: 0 0 -150px 58px; height: 134px; box-sizing: border-box;
+  background: rgba(255,255,255,.94); border-radius: 8px; padding: .55rem .8rem;
+  box-shadow: 0 1px 6px rgba(20,54,31,.25); font-size: .8rem; color: var(--ink);
+}
+.pm-map-legend b { display: block; margin-bottom: .25rem; color: var(--forest); }
+.pm-map-legend div { display: flex; align-items: center; gap: .45rem; margin: .18rem 0; }
+.pm-swatch { display: inline-block; width: 1.9rem; height: .34rem; border-radius: 3px; }
+.pm-trail-hero {
+  margin: 0 -1rem 1.2rem; padding: 7rem 3rem 1.6rem; color: #fff;
+  background-size: cover; background-position: center; border-radius: 0 0 14px 14px;
+  position: relative; background-color: var(--forest);
+}
+.pm-trail-hero h1 { color: #fff; font-size: 2.6rem; margin: .2rem 0 .6rem; padding: 0; }
+.pm-trail-hero .pm-area { color: var(--sun); }
+.pm-topbar { height: .6rem; }
 </style>
 """
 
@@ -164,9 +190,17 @@ def bg(url: str) -> str:
     return f"background-image:url('{escape(url, quote=True)}')"
 
 
+PROCESSED_DIR = ROOT / "data" / "processed"
+
+
 @st.cache_resource
-def get_catalog() -> Catalog:
-    return load_catalog(ROOT / "data" / "processed")
+def get_catalog(data_stamp: float) -> Catalog:
+    """Load the tables; ``data_stamp`` reloads them when a file changes."""
+    return load_catalog(PROCESSED_DIR)
+
+
+def data_stamp() -> float:
+    return max(path.stat().st_mtime for path in PROCESSED_DIR.iterdir())
 
 
 def chips(trail: dict) -> str:
@@ -199,37 +233,96 @@ def photo_tile(photo: dict | None, css: str = "pm-card-img", extra: str = "") ->
     )
 
 
-def select_trail(trail_id: str) -> None:
-    st.session_state.selected_trail = trail_id
+def open_trail(trail_id: str) -> None:
+    st.query_params["trail"] = trail_id
 
 
-def build_map(catalog: Catalog, selected_id: str, whole_park: bool) -> folium.Map:
+def close_trail() -> None:
+    if "trail" in st.query_params:
+        del st.query_params["trail"]
+    # A fresh key stops the overview map replaying its last click.
+    st.session_state.map_nonce = st.session_state.get("map_nonce", 0) + 1
+
+
+def scroll_to_top(page: str) -> None:
+    """Jump to the top when the visitor moves between pages."""
+    if st.session_state.get("last_page") != page:
+        st.session_state.last_page = page
+        components.html(
+            "<script>const m = window.parent.document.querySelector("
+            "'[data-testid=\"stMain\"]'); if (m) m.scrollTo(0, 0);"
+            "window.parent.scrollTo(0, 0);</script>",
+            height=0,
+        )
+
+
+def view_for(features: list[dict], width_px: int, height_px: int) -> tuple[list[float], int]:
+    """Center and zoom level that fit ``features`` in a map of the given size."""
+    west, south, east, north = bounds(features)
+    center = [(south + north) / 2, (west + east) / 2]
+    lon_span = max(east - west, 1e-4)
+    lat_span = max(north - south, 1e-4) / cos(radians(center[0]))
+    zoom = min(
+        log2(360 * width_px / 256 / lon_span),
+        log2(360 * height_px / 256 / lat_span),
+    )
+    return center, max(9, min(16, int(zoom - 0.35)))
+
+
+def build_map(catalog: Catalog, selected_id: str | None, height_px: int) -> folium.Map:
+    """All routes colored by difficulty; the selected one is highlighted."""
     park = catalog.parks[PARK_CODE]
-    selected = catalog.trail(selected_id)
-    center, zoom = [park["latitude"], park["longitude"]], 10
-    if not whole_park and selected_id in catalog.routes:
-        west, south, east, north = bounds([catalog.routes[selected_id]])
-        center, zoom = [(south + north) / 2, (west + east) / 2], 16
-    elif not whole_park and selected["latitude"] is not None:
-        center, zoom = [selected["latitude"], selected["longitude"]], 13
+    focus = (
+        [catalog.routes[selected_id]]
+        if selected_id in catalog.routes
+        else list(catalog.routes.values())
+    )
+    if focus:
+        center, zoom = view_for(focus, 700 if selected_id else 900, height_px)
+    else:
+        center, zoom = [park["latitude"], park["longitude"]], 10
+    if selected_id and selected_id not in catalog.routes:
+        chosen = catalog.trail(selected_id)
+        if chosen["latitude"] is not None:
+            center, zoom = [chosen["latitude"], chosen["longitude"]], 13
+
     trail_map = folium.Map(
         location=center,
         zoom_start=zoom,
-        tiles="OpenStreetMap",
+        tiles=None,
         control_scale=True,
+        scrollWheelZoom=False,  # let the mouse wheel scroll the page
     )
+    folium.TileLayer(
+        tiles=(
+            "https://basemap.nationalmap.gov/arcgis/rest/services/"
+            "USGSTopo/MapServer/tile/{z}/{y}/{x}"
+        ),
+        attr="USGS The National Map",
+        name="Topographic map",
+        max_zoom=16,
+    ).add_to(trail_map)
+    folium.TileLayer("OpenStreetMap", name="Street map", show=False).add_to(trail_map)
 
-    for trail_id, feature in catalog.routes.items():
-        verified = feature["properties"].get("geometry_verified", False)
-        folium.GeoJson(
-            feature,
-            style_function=lambda _f, verified=verified, chosen=trail_id == selected_id: {
-                "color": "#d9480f" if chosen else "#2d7aa8",
-                "weight": 5,
-                "dashArray": None if verified else "8 8",
-            },
-            tooltip=catalog.trail(trail_id)["trail_name"],
-        ).add_to(trail_map)
+    ordered = sorted(catalog.routes.items(), key=lambda item: item[0] == selected_id)
+    for trail_id, feature in ordered:
+        trail = catalog.trail(trail_id)
+        chosen = trail_id == selected_id
+        color = SUN if chosen else LINE_COLORS.get(trail["difficulty"], "#777")
+        casing = "#14361f" if chosen else "#ffffff"
+        for line_color, weight in (
+            (casing, 10 if chosen else 8),
+            (color, 6 if chosen else 4),
+        ):
+            folium.GeoJson(
+                feature,
+                style_function=lambda _f, c=line_color, w=weight: {
+                    "color": c,
+                    "weight": w,
+                    "opacity": 1.0,
+                },
+                tooltip=trail["trail_name"],
+            ).add_to(trail_map)
 
     for trail in catalog.trails:
         if trail["latitude"] is None or trail["longitude"] is None:
@@ -237,15 +330,16 @@ def build_map(catalog: Catalog, selected_id: str, whole_park: bool) -> folium.Ma
         chosen = trail["trail_id"] == selected_id
         folium.CircleMarker(
             location=[trail["latitude"], trail["longitude"]],
-            radius=13 if chosen else 8,
-            color="#14361f",
-            weight=3 if chosen else 1.5,
+            radius=9 if chosen else 6,
+            color="#14361f" if chosen else "#ffffff",
+            weight=2,
             fill=True,
-            fill_color=SUN if chosen else LEVEL_COLORS.get(trail["difficulty"], "#888"),
+            fill_color=SUN if chosen else LINE_COLORS.get(trail["difficulty"], "#777"),
             fill_opacity=1.0,
             tooltip=trail["trail_name"],
         ).add_to(trail_map)
 
+    folium.LayerControl(collapsed=True).add_to(trail_map)
     return trail_map
 
 
@@ -257,114 +351,197 @@ def clicked_trail(catalog: Catalog, clicked: dict) -> str | None:
         for trail in catalog.trails:
             if trail["trail_name"] == name:
                 return trail["trail_id"]
-    point = clicked.get("last_object_clicked")
-    if point:
-        for trail in catalog.trails:
-            if (
-                trail["latitude"] is not None
-                and abs(trail["latitude"] - point["lat"]) < 1e-6
-                and abs(trail["longitude"] - point["lng"]) < 1e-6
-            ):
-                return trail["trail_id"]
+    drawing = clicked.get("last_active_drawing") or {}
+    trail_id = (drawing.get("properties") or {}).get("trail_id")
+    if trail_id in {trail["trail_id"] for trail in catalog.trails}:
+        return trail_id
     return None
 
 
-def render_detail(catalog: Catalog, trail: dict) -> None:
-    park = catalog.parks[PARK_CODE]
-    photos = catalog.showable_photos(trail["trail_id"])
-    gallery = photo_tile(photos[0] if photos else None, "pm-gallery-main")
-    if len(photos) > 1:
-        gallery += "<div class='pm-thumbs'>" + "".join(
-            photo_tile(photo, "pm-gallery-main") for photo in photos[1:]
-        ) + "</div>"
-
-    labels = ""
-    if trail["designation"]:
-        labels = (
-            "<div class='pm-chips'><span class='pm-chip label'>"
-            f"{escape(trail['designation'])}</span></div>"
-        )
-    scenery = "".join(
-        f"<span class='pm-chip'>{SCENERY_LABELS[tag]}</span>"
-        for tag in trail["scenery_tags"]
+def render_map(catalog: Catalog, selected_id: str | None, height_px: int, key: str) -> None:
+    """Draw the legend and map; a click on a route opens that trail's page."""
+    rows = "".join(
+        f"<div><span class='pm-swatch' style='background:{color}'></span>{name}</div>"
+        for name, color in LINE_COLORS.items()
     )
-    stats = [
-        ("Distance", f"{trail['distance_miles']:g} mi" if trail["distance_miles"] else "Unknown"),
-        ("Elevation gain", f"{trail['elevation_gain_ft']:,.0f} ft" if trail["elevation_gain_ft"] else "Unknown"),
-        ("Hiking time", trail["nps_duration_text"] or "Unknown"),
-        ("Difficulty", trail["difficulty"] or "Unknown"),
-        ("Route type", trail["route_type"] or "Unknown"),
-        ("Seasons", trail["seasons"].replace("|", ", ") or "Unknown"),
-    ]
-    stat_html = "".join(
-        f"<div class='pm-stat'><span>{name}</span><b>{escape(str(value))}</b></div>"
-        for name, value in stats
-    )
-    alert = (
-        f"<div class='pm-alert'><b>NPS notice:</b> {escape(trail['alert'])}</div>"
-        if trail["alert"]
-        else ""
-    )
-    if trail["geometry_status"] == "none":
-        geometry_note = (
-            "The route line for this trail is not mapped yet. The marker shows "
-            "the location NPS lists for this hike."
-        )
-    elif not trail["geometry_verified"]:
-        geometry_note = (
-            "The dashed route line is provisional: it has not been fully checked "
-            "against the official route, and it may have gaps."
-        )
-    else:
-        geometry_note = ""
-    notes = "".join(
-        f"<div class='pm-note'>{escape(text)}</div>"
-        for text in (geometry_note, trail["attribute_note"])
-        if text
-    )
-
     block(
         f"""
-        <div class='pm-detail'>
-        {gallery}
-        <div class='pm-area' style='margin-top:.7rem'>{escape(trail['area'])}</div>
-        <h3>{escape(trail['trail_name'])}</h3>
-        {labels}
-        <div class='pm-chips'>{scenery}</div>
-        <div class='pm-stats'>{stat_html}</div>
-        {alert}
-        <p>{escape(trail['summary'])}</p>
-        {notes}
+        <div class='pm-map-legend'>
+        <b>Trail difficulty</b>
+        {rows}
+        <div><span class='pm-swatch' style='background:{SUN};outline:2px solid #14361f'></span>Selected trail</div>
         </div>
         """
     )
-    with st.expander("More about this trail (from NPS)"):
-        st.write(trail["description"])
-    left, right = st.columns(2)
-    left.link_button(
-        "Check current NPS conditions",
-        park["conditions_url"],
-        type="primary",
+    clicked = st_folium(
+        build_map(catalog, selected_id, height_px),
+        height=height_px,
         use_container_width=True,
+        key=key,
+        returned_objects=[
+            "last_object_clicked",
+            "last_object_clicked_tooltip",
+            "last_active_drawing",
+        ],
     )
-    right.link_button(
-        "Official NPS trail page", trail["source_url"], use_container_width=True
-    )
+    match = clicked_trail(catalog, clicked or {})
+    if match and match != selected_id:
+        st.query_params["trail"] = match
+        st.rerun()
 
 
-def main() -> None:
-    st.set_page_config(page_title="ParkMatch — Mount Rainier", page_icon="🏔️", layout="wide")
-    st.markdown(CSS, unsafe_allow_html=True)
-    catalog = get_catalog()
+def route_notes(catalog: Catalog, trail: dict) -> str:
+    feature = catalog.routes.get(trail["trail_id"])
+    notes: list[str] = []
+    if feature is None:
+        notes.append(
+            "The route line for this trail is not mapped yet. The marker shows "
+            "the location NPS lists for this hike."
+        )
+    else:
+        properties = feature["properties"]
+        if not properties.get("geometry_verified"):
+            notes.append(
+                "The route line is provisional. It was assembled from "
+                f"{properties.get('geometry_source', 'public trail data')} and has "
+                "not been checked against the official NPS map. Do not use it "
+                "for navigation."
+            )
+        if properties.get("route_note"):
+            notes.append(properties["route_note"])
+    if trail["attribute_note"]:
+        notes.append(trail["attribute_note"])
+    return "".join(f"<div class='pm-note'>{escape(text)}</div>" for text in notes)
+
+
+def render_trail_page(catalog: Catalog, trail: dict) -> None:
     park = catalog.parks[PARK_CODE]
-    trail_ids = [trail["trail_id"] for trail in catalog.trails]
+    photos = catalog.showable_photos(trail["trail_id"])
+    cover = photos[0] if photos else None
 
-    # A map click from the previous run is applied before any widget is drawn.
-    pending = st.session_state.pop("pending_trail", None)
-    if pending in trail_ids:
-        st.session_state.selected_trail = pending
+    block("<div class='pm-topbar'></div>")
+    st.button("← Back to all trails and the map", on_click=close_trail)
 
-    # ---- Hero -----------------------------------------------------------
+    hero_style = (
+        "background-image:linear-gradient(180deg, rgba(20,54,31,.1), rgba(20,54,31,.9)), "
+        f"url('{escape(cover['remote_url'], quote=True)}')"
+        if cover
+        else ""
+    )
+    credit = f"<span class='pm-credit'>Photo: {escape(cover['credit'])}</span>" if cover else ""
+    label = (
+        f"<span class='pm-chip label'>{escape(trail['designation'])}</span>"
+        if trail["designation"]
+        else ""
+    )
+    block(
+        f"""
+        <div class='pm-trail-hero' style="{hero_style}">
+        <div class='pm-area'>{escape(trail['area'])} · {escape(park['park_name'])}</div>
+        <h1>{escape(trail['trail_name'])}</h1>
+        <div class='pm-chips'>{chips(trail)}{label}</div>
+        {credit}
+        </div>
+        """
+    )
+
+    map_col, detail_col = st.columns([3, 2], gap="large")
+    with map_col:
+        block(
+            "<div class='pm-section' style='margin-top:0'><h2>Route map</h2>"
+            "<p>The highlighted line is this trail. Click another line to open that trail.</p></div>"
+        )
+        render_map(catalog, trail["trail_id"], 560, key=f"trail_map_{trail['trail_id']}")
+        block(route_notes(catalog, trail))
+    with detail_col:
+        scenery = "".join(
+            f"<span class='pm-chip'>{SCENERY_LABELS[tag]}</span>"
+            for tag in trail["scenery_tags"]
+        )
+        stats = [
+            ("Distance", f"{trail['distance_miles']:g} mi" if trail["distance_miles"] else "Unknown"),
+            ("Elevation gain", f"{trail['elevation_gain_ft']:,.0f} ft" if trail["elevation_gain_ft"] else "Unknown"),
+            ("Hiking time", trail["nps_duration_text"] or "Unknown"),
+            ("Difficulty", trail["difficulty"] or "Unknown"),
+            ("Route type", trail["route_type"] or "Unknown"),
+            ("Seasons", trail["seasons"].replace("|", ", ") or "Unknown"),
+        ]
+        stat_html = "".join(
+            f"<div class='pm-stat'><span>{name}</span><b>{escape(str(value))}</b></div>"
+            for name, value in stats
+        )
+        alert = (
+            f"<div class='pm-alert'><b>NPS notice:</b> {escape(trail['alert'])}</div>"
+            if trail["alert"]
+            else ""
+        )
+        gallery = ""
+        if len(photos) > 1:
+            gallery = "<div class='pm-thumbs' style='margin:0 0 .8rem'>" + "".join(
+                photo_tile(photo, "pm-gallery-main") for photo in photos[1:]
+            ) + "</div>"
+        block(
+            f"""
+            <div class='pm-detail'>
+            {alert}
+            <p style='font-size:1.05rem'>{escape(trail['summary'])}</p>
+            <div class='pm-chips'>{scenery}</div>
+            <div class='pm-stats'>{stat_html}</div>
+            {gallery}
+            </div>
+            """
+        )
+        with st.expander("More about this trail (from NPS)", expanded=True):
+            st.write(trail["description"])
+        left, right = st.columns(2)
+        left.link_button(
+            "Check current NPS conditions",
+            park["conditions_url"],
+            type="primary",
+            use_container_width=True,
+        )
+        right.link_button(
+            "Official NPS trail page", trail["source_url"], use_container_width=True
+        )
+
+
+def render_footer(catalog: Catalog) -> None:
+    park = catalog.parks[PARK_CODE]
+    park_tiles = "".join(
+        photo_tile(photo, "pm-gallery-main")
+        for photo in [
+            p for p in catalog.park_photos
+            if p["license_type"] != "unknown" and p["is_hero"] != "true"
+        ][:3]
+    )
+    block(
+        f"""
+        <div class='pm-park'>
+        <h2>{escape(park['park_name'])}</h2>
+        <p>{escape(park['description'])}</p>
+        <p><b>Entrance fees (from NPS):</b> {escape(park['entrance_fee_note'])}</p>
+        <p><a href="{escape(park['official_url'], quote=True)}" target="_blank">Official park website</a>
+        &nbsp;·&nbsp;
+        <a href="{escape(park['conditions_url'], quote=True)}" target="_blank">Current conditions and alerts</a></p>
+        <div class='pm-park-photos'>{park_tiles}</div>
+        </div>
+        <div class='pm-footer'>
+        ParkMatch is a student prototype. It is not affiliated with or endorsed by the
+        National Park Service. Trail text, locations, and photos come from the NPS Data API.
+        Route lines come from the Washington State Trails Database (Recreation and
+        Conservation Office); they are provisional and for information only, not navigation.
+        Base maps: USGS The National Map and © OpenStreetMap contributors. Difficulty is a draft rule, not an
+        NPS rating: Hard is {HARD_MIN_MILES:g}+ miles or {HARD_MIN_GAIN_FT:,}+ ft of gain;
+        Easy is up to {EASY_MAX_MILES:g} miles with under {EASY_MAX_GAIN_FT} ft of gain;
+        everything else is Moderate. Always check current conditions with NPS before you go.
+        </div>
+        """
+    )
+
+
+def render_home(catalog: Catalog) -> None:
+    park = catalog.parks[PARK_CODE]
+
     hero = next(
         (p for p in catalog.park_photos if p["is_hero"] == "true" and p["license_type"] != "unknown"),
         None,
@@ -393,22 +570,22 @@ def main() -> None:
     block("<div class='pm-section'><h2>1 · Plan your hike</h2></div>")
     with st.container(border=True):
         col_city, col_level, col_time, col_scenery = st.columns([1, 1.6, 2.3, 2.3])
-        city = col_city.selectbox("Starting from", list(START_CITIES))
+        city = col_city.selectbox("Starting from", list(START_CITIES), key="pref_city")
         level = col_level.segmented_control(
-            "Hardest level you want", DIFFICULTY_LEVELS, default="Moderate"
-        ) or "Moderate"
+            "Hardest level you want", DIFFICULTY_LEVELS, key="pref_level"
+        ) or PREF_DEFAULTS["pref_level"]
         time_key = col_time.segmented_control(
             "Time you have to hike",
             list(TIME_LABELS),
             format_func=TIME_LABELS.get,
-            default="2_to_4",
-        ) or "2_to_4"
+            key="pref_time",
+        ) or PREF_DEFAULTS["pref_time"]
         scenery = col_scenery.pills(
             "What you want to see",
             list(SCENERY_LABELS),
             format_func=SCENERY_LABELS.get,
             selection_mode="multi",
-            default=["mountain_views"],
+            key="pref_scenery",
         )
         miles = haversine_meters(
             START_CITIES[city], (park["longitude"], park["latitude"])
@@ -419,13 +596,7 @@ def main() -> None:
             "starting city does not change the ranking."
         )
 
-    preferences = Preferences(level, time_key, tuple(scenery))
-    result = recommend(catalog.trails, preferences)
-
-    if "selected_trail" not in st.session_state:
-        st.session_state.selected_trail = (
-            result.recommendations[0].trail_id if result.recommendations else trail_ids[0]
-        )
+    result = recommend(catalog.trails, Preferences(level, time_key, tuple(scenery)))
 
     # ---- Matches --------------------------------------------------------
     block(
@@ -433,9 +604,7 @@ def main() -> None:
         "<p>Trails that are too hard or too long for your choices are left out.</p></div>"
     )
     if not result.recommendations:
-        st.warning(
-            "No trail fits these choices. Try a harder level or more time."
-        )
+        st.warning("No trail fits these choices. Try a harder level or more time.")
     else:
         columns = st.columns(3)
         for rank, (column, rec) in enumerate(zip(columns, result.recommendations), 1):
@@ -460,9 +629,9 @@ def main() -> None:
                     """
                 )
                 st.button(
-                    "See map and photos",
+                    "Open trail page",
                     key=f"rec_{rec.trail_id}",
-                    on_click=select_trail,
+                    on_click=open_trail,
                     args=(rec.trail_id,),
                     use_container_width=True,
                     type="primary",
@@ -472,47 +641,15 @@ def main() -> None:
             for trail_id, reason in result.excluded.items():
                 st.write(f"**{catalog.trail(trail_id)['trail_name']}** — {reason}")
 
-    # ---- Explorer -------------------------------------------------------
+    # ---- Routes map -----------------------------------------------------
     block(
-        "<div class='pm-section'><h2>3 · Explore the trail</h2>"
-        "<p>Click a marker on the map, or pick a trail from the list.</p></div>"
+        "<div class='pm-section'><h2>3 · Trail map</h2>"
+        "<p>Every trail in the park catalog. Click a line or a dot to open that trail's page. "
+        "Route lines are provisional and not for navigation.</p></div>"
     )
-    pick_col, toggle_col = st.columns([3, 1])
-    pick_col.selectbox(
-        "Trail",
-        trail_ids,
-        format_func=lambda trail_id: catalog.trail(trail_id)["trail_name"],
-        key="selected_trail",
-        label_visibility="collapsed",
+    render_map(
+        catalog, None, 620, key=f"overview_map_{st.session_state.get('map_nonce', 0)}"
     )
-    whole_park = toggle_col.toggle("Show whole park", value=False)
-    selected_id = st.session_state.selected_trail
-    selected = catalog.trail(selected_id)
-
-    map_col, detail_col = st.columns([3, 2], gap="large")
-    with map_col:
-        clicked = st_folium(
-            build_map(catalog, selected_id, whole_park),
-            height=640,
-            use_container_width=True,
-            key=f"map_{selected_id}_{whole_park}",
-            returned_objects=["last_object_clicked", "last_object_clicked_tooltip"],
-        )
-        block(
-            "<div class='pm-legend'>Markers:"
-            f"<span class='pm-dot' style='background:{SUN}'></span>selected"
-            + "".join(
-                f"<span class='pm-dot' style='background:{color}'></span>{name}"
-                for name, color in LEVEL_COLORS.items()
-            )
-            + " · Dashed line: provisional route</div>"
-        )
-        match = clicked_trail(catalog, clicked or {})
-        if match and match != selected_id:
-            st.session_state.pending_trail = match
-            st.rerun()
-    with detail_col:
-        render_detail(catalog, selected)
 
     # ---- All trails -----------------------------------------------------
     block(
@@ -537,42 +674,31 @@ def main() -> None:
                     """
                 )
                 st.button(
-                    "View",
+                    "Open",
                     key=f"all_{trail['trail_id']}",
-                    on_click=select_trail,
+                    on_click=open_trail,
                     args=(trail["trail_id"],),
                     use_container_width=True,
                 )
 
-    # ---- Park -----------------------------------------------------------
-    park_tiles = "".join(
-        photo_tile(photo, "pm-gallery-main")
-        for photo in [
-            p for p in catalog.park_photos
-            if p["license_type"] != "unknown" and p["is_hero"] != "true"
-        ][:3]
-    )
-    block(
-        f"""
-        <div class='pm-park'>
-        <h2>{escape(park['park_name'])}</h2>
-        <p>{escape(park['description'])}</p>
-        <p><b>Entrance fees (from NPS):</b> {escape(park['entrance_fee_note'])}</p>
-        <p><a href="{escape(park['official_url'], quote=True)}" target="_blank">Official park website</a>
-        &nbsp;·&nbsp;
-        <a href="{escape(park['conditions_url'], quote=True)}" target="_blank">Current conditions and alerts</a></p>
-        <div class='pm-park-photos'>{park_tiles}</div>
-        </div>
-        <div class='pm-footer'>
-        ParkMatch is a student prototype. It is not affiliated with or endorsed by the
-        National Park Service. Trail text, locations, and photos come from the NPS Data API;
-        map tiles © OpenStreetMap contributors. Difficulty is a draft rule, not an NPS rating:
-        Hard is {HARD_MIN_MILES:g}+ miles or {HARD_MIN_GAIN_FT:,}+ ft of gain; Easy is up to
-        {EASY_MAX_MILES:g} miles with under {EASY_MAX_GAIN_FT} ft of gain; everything else is
-        Moderate. Always check current conditions with NPS before you go.
-        </div>
-        """
-    )
+
+def main() -> None:
+    st.set_page_config(page_title="ParkMatch — Mount Rainier", page_icon="🏔️", layout="wide")
+    st.markdown(CSS, unsafe_allow_html=True)
+    catalog = get_catalog(data_stamp())
+
+    # Keep the visitor's choices alive while the form is off screen.
+    for key, default in PREF_DEFAULTS.items():
+        st.session_state[key] = st.session_state.get(key, default)
+
+    trail_id = st.query_params.get("trail")
+    if trail_id in {trail["trail_id"] for trail in catalog.trails}:
+        scroll_to_top(trail_id)
+        render_trail_page(catalog, catalog.trail(trail_id))
+    else:
+        scroll_to_top("home")
+        render_home(catalog)
+    render_footer(catalog)
 
 
 main()

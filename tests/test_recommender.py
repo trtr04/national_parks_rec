@@ -96,3 +96,12 @@ def test_built_catalog_joins_and_photo_rules() -> None:
         assert len(photos) <= 3
         assert all(photo["license_type"] != "unknown" for photo in photos)
         assert all(photo["review_status"] == "approved" for photo in photos)
+
+
+def test_every_trail_has_one_connected_provisional_route() -> None:
+    catalog = load_catalog(ROOT / "data" / "processed")
+    for item in catalog.trails:
+        properties = catalog.routes[item["trail_id"]]["properties"]
+        assert properties["connected_component_count"] == 1
+        assert properties["geometry_verified"] is False
+        assert properties["source_objectids"]

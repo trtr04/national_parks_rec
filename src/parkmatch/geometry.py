@@ -247,3 +247,33 @@ def endpoint_topology(
         ),
     }
 
+
+
+def clip_lines_to_bbox(
+    geometry: dict[str, Any], bbox: Sequence[float]
+) -> list[list[Coordinate]]:
+    """Keep the runs of vertices that fall inside ``bbox``.
+
+    ``bbox`` is west, south, east, north. A line that leaves and re-enters
+    the box is split into separate runs. No vertices are added at the box
+    edge, so each kept run ends at the last source vertex inside the box.
+    """
+
+    west, south, east, north = bbox
+    kept: list[list[Coordinate]] = []
+    for line in iter_lines(geometry):
+        run: list[Coordinate] = []
+        for coordinate in line:
+            inside = (
+                west <= float(coordinate[0]) <= east
+                and south <= float(coordinate[1]) <= north
+            )
+            if inside:
+                run.append(coordinate)
+            else:
+                if len(run) >= 2:
+                    kept.append(run)
+                run = []
+        if len(run) >= 2:
+            kept.append(run)
+    return kept

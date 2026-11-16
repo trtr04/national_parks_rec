@@ -74,3 +74,15 @@ def test_endpoint_topology_detects_cycle_without_route_order() -> None:
     assert topology["open_endpoint_count"] == 0
     assert topology["cycle_rank"] == 1
 
+
+
+def test_clip_keeps_runs_inside_the_box() -> None:
+    from parkmatch.geometry import clip_lines_to_bbox
+
+    geometry = {
+        "type": "LineString",
+        "coordinates": [[0, 0], [1, 0], [2, 0], [5, 0], [2.5, 0], [1.5, 0]],
+    }
+    runs = clip_lines_to_bbox(geometry, [0.5, -1, 3, 1])
+    assert runs == [[[1, 0], [2, 0]], [[2.5, 0], [1.5, 0]]]
+    assert clip_lines_to_bbox(geometry, [10, 10, 11, 11]) == []

@@ -1,0 +1,12 @@
+# Everything for local development: the server's requirements plus tests and the notebook.
+# Install with:  pip install -r requirements-dev.txt
+-r requirements.txt
+
+# Testing
+pytest>=8.0
+httpx>=0.27            # required by FastAPI's TestClient
+
+# EDA notebook (notebooks/01_eda.ipynb)
+matplotlib>=3.9
+nbconvert>=7.16        # runs the notebook from the command line
+ipykernel>=6.29

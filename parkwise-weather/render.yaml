@@ -1,0 +1,26 @@
+# Render Blueprint for the ParkWise Weather API.
+# Render → New → Blueprint → pick this repository, Blueprint path parkwise-weather/render.yaml.
+# See parkwise-weather/docs/DEPLOYMENT.md.
+services:
+  - type: web
+    name: parkwise-weather-api
+    runtime: python
+    plan: free
+    rootDir: parkwise-weather/backend
+    buildCommand: pip install -r requirements.txt
+    # Render sets $PORT. --proxy-headers so logs show real client addresses behind Render's proxy.
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.5
+      - key: ENVIRONMENT
+        value: production
+      # Secrets and per-deployment values: Render asks for these when the Blueprint is created.
+      - key: DATABASE_URL          # Neon connection string (…?sslmode=require)
+        sync: false
+      - key: CORS_ORIGINS          # your Vercel URL, e.g. https://parkwise-weather.vercel.app
+        sync: false
+      - key: CORS_ORIGIN_REGEX     # optional: Vercel preview URLs (see docs/DEPLOYMENT.md)
+        sync: false

@@ -1,0 +1,26 @@
+# ParkWise Weather backend: what the API server needs (Render installs this file).
+# Development extras (tests, the EDA notebook) are in requirements-dev.txt.
+
+# Web API
+fastapi>=0.115,<1.0
+uvicorn[standard]>=0.30
+
+# Data validation + settings (.env support)
+pydantic>=2.7,<3.0
+pydantic-settings>=2.3,<3.0
+python-dotenv>=1.0
+
+# Database
+sqlalchemy>=2.0,<3.0
+psycopg[binary]>=3.2   # PostgreSQL driver (Neon in production)
+
+# ETL (NPS + Open-Meteo) and the live forecast
+requests>=2.32
+
+# Models
+pandas>=2.2
+numpy>=1.26
+# Pinned: trained_models/climate_model.joblib is a pickle, and scikit-learn only
+# guarantees it loads in the version that trained it. Retrain after changing this.
+scikit-learn==1.9.1
+joblib>=1.4

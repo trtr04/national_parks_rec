@@ -1,0 +1,67 @@
+# Runs on every push and pull request. Render and Vercel deploy separately from main.
+name: ParkWise Weather CI
+
+# Only runs when the parkwise-weather/ folder (or this file) changes.
+on:
+  push:
+    paths: ["parkwise-weather/**", ".github/workflows/parkwise-weather-ci.yml"]
+  pull_request:
+    paths: ["parkwise-weather/**", ".github/workflows/parkwise-weather-ci.yml"]
+
+jobs:
+  backend:
+    name: Backend tests (${{ matrix.database }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        database: [sqlite, postgres]
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: parkwise
+          POSTGRES_PASSWORD: parkwise
+          POSTGRES_DB: parkwise_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+    defaults:
+      run:
+        working-directory: parkwise-weather/backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: parkwise-weather/backend/.python-version
+          cache: pip
+          cache-dependency-path: parkwise-weather/backend/requirements*.txt
+      - run: pip install -r requirements-dev.txt
+      - name: pytest
+        env:
+          TEST_DATABASE_URL: ${{ matrix.database == 'postgres' && 'postgresql://parkwise:parkwise@localhost:5432/parkwise_test' || '' }}
+        run: pytest -q
+      - name: Committed model loads with the pinned scikit-learn
+        run: |
+          python -c "
+          import joblib, sklearn
+          b = joblib.load('../trained_models/climate_model.joblib')
+          assert b['sklearn_version'] == sklearn.__version__, (b['sklearn_version'], sklearn.__version__)
+          print('model', b['model_name'], 'trained with scikit-learn', b['sklearn_version'])
+          "
+
+  frontend:
+    name: Frontend tests and build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: parkwise-weather/frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: parkwise-weather/frontend/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run build

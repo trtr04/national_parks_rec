@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Bar, BarChart, CartesianGrid, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import ActivityPicker, { COMFORT_BAND_C, activityLabel } from "../components/ActivityPicker.jsx";
 import PageHeader from "../components/PageHeader.jsx";
@@ -143,8 +144,10 @@ function BestMonths({ data, activity }) {
 
 export default function BestTimePage() {
   const parks = useApi((signal) => api.listParks(null, { signal }), []);
-  const [parkCode, setParkCode] = useState("");
-  const [activity, setActivity] = useState("hiking");
+  // ?park=mora&activity=camping preselects, e.g. from the Find a park page.
+  const [searchParams] = useSearchParams();
+  const [parkCode, setParkCode] = useState(searchParams.get("park") || "");
+  const [activity, setActivity] = useState(searchParams.get("activity") || "hiking");
   const result = useApi((signal) => api.bestTime(parkCode, { signal }), [parkCode], Boolean(parkCode));
 
   return (

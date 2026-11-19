@@ -449,7 +449,7 @@ def render_trail_page(catalog: Catalog, trail: dict) -> None:
     with map_col:
         block(
             "<div class='pm-section' style='margin-top:0'><h2>Route map</h2>"
-            "<p>The highlighted line is this trail. Click another line to open that trail.</p></div>"
+            "<p>The highlighted line is this trail.</p></div>"
         )
         render_map(catalog, trail["trail_id"], 560, key=f"trail_map_{trail['trail_id']}")
         block(route_notes(catalog, trail))

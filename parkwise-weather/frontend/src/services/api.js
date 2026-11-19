@@ -78,4 +78,6 @@ export const api = {
       body: { park_codes: parkCodes, date, activity },
     }),
   modelPerformance: (opts) => request("/api/models/performance", opts),
+  recommendOptions: (opts) => request("/api/recommend/options", opts),
+  recommendParks: (body, opts) => request("/api/recommend/parks", { ...opts, method: "POST", body }),
 };

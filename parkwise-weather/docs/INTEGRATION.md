@@ -39,6 +39,8 @@ machine-readable OpenAPI schema at `/openapi.json` (use it to generate a typed c
 | GET | `/api/weather/seasonal/{park_code}` | Monthly averages straight from the historical data |
 | GET | `/api/weather/history/{park_code}?start_date=&end_date=` | Daily observations (max 3 years per call) |
 | GET | `/api/models/performance` | Model accuracy, for an "about the data" page |
+| GET | `/api/recommend/options` | Choices the park recommender understands (cities, scenery, wildlife, amenities) |
+| POST | `/api/recommend/parks` | Rank all parks for a month, activity and preferences, with reasons (see `app/services/park_recommender.py`) |
 
 ### `GET /api/weather/predict`
 

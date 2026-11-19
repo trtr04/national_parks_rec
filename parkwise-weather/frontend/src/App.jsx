@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout.jsx";
+import FindParkPage from "./pages/FindParkPage.jsx";
 import WeatherExplorer from "./pages/WeatherExplorer.jsx";
 import HistoryDashboard from "./pages/HistoryDashboard.jsx";
 import ComparePage from "./pages/ComparePage.jsx";
@@ -13,6 +14,7 @@ export default function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<WeatherExplorer />} />
+        <Route path="find" element={<FindParkPage />} />
         <Route path="history" element={<HistoryDashboard />} />
         <Route path="compare" element={<ComparePage />} />
         <Route path="best-time" element={<BestTimePage />} />

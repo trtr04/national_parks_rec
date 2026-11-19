@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
 const LINKS = [
+  { to: "/find", label: "Find a park" },
   { to: "/", label: "Explorer", end: true },
   { to: "/history", label: "History" },
   { to: "/compare", label: "Compare parks" },

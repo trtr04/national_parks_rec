@@ -77,3 +77,26 @@ CREATE TABLE IF NOT EXISTS weather_predictions (
 
 CREATE INDEX IF NOT EXISTS ix_weather_predictions_park_target
     ON weather_predictions (park_code, target_date);
+
+-- ---------------------------------------------------------------------
+-- 4. park_features — what each park offers, for the park recommender
+--    Filled by scripts/load_park_features.py from the NPS API. Topics and
+--    activities keep NPS's own names; the recommender maps them to the
+--    scenery and wildlife choices users see.
+-- ---------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS park_features (
+    park_code                 VARCHAR(10)  PRIMARY KEY REFERENCES parks(park_code) ON DELETE CASCADE,
+    topics                    JSON         NOT NULL,   -- list of NPS topic names
+    activities                JSON         NOT NULL,   -- list of NPS activity names
+    campground_count          INTEGER      NOT NULL DEFAULT 0,
+    campgrounds_with_showers  INTEGER      NOT NULL DEFAULT 0,
+    campground_open_months    JSON,                    -- 12 counts, Jan first: campgrounds open most of each month
+    visitor_center_count      INTEGER,                 -- NULL = not loaded
+    vehicle_fee_usd           DOUBLE PRECISION,        -- NULL = NPS lists no private-vehicle fee
+    nps_url                   VARCHAR(300),
+    image_url                 VARCHAR(500),
+    image_alt                 TEXT,
+    image_credit              VARCHAR(300),
+    updated_at                TIMESTAMPTZ  DEFAULT now(),
+    CONSTRAINT ck_pf_campgrounds_nonneg CHECK (campground_count >= 0)
+);

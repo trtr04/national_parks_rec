@@ -135,6 +135,7 @@ Load the data and train the model (Phases 2–3, one time):
 
 ```bash
 python -m scripts.load_parks             # 63 National Parks from the NPS API (~5 s)
+python -m scripts.load_park_features     # scenery, wildlife, amenities for the park recommender (~10 s)
 python -m scripts.load_weather_history   # 2015–2025 daily weather from Open-Meteo (~30 min)
 python -m scripts.validate_data          # writes data/validation_report.md
 python -m scripts.train_models           # trains, evaluates, saves trained_models/ (~1 min)

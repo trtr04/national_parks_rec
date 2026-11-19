@@ -133,3 +133,20 @@ class CompareRequest(BaseModel):
     park_codes: list[str] = Field(min_length=2, max_length=5, examples=[["yose", "zion"]])
     date: dt.date
     activity: Activity = Activity.hiking
+
+
+# ---------- Park recommendation request ----------
+
+class ParkRecommendRequest(BaseModel):
+    """What the traveller wants. Every preference except month is optional."""
+
+    month: int = Field(ge=1, le=12, examples=[7], description="Travel month, 1–12")
+    activity: Activity = Activity.hiking
+    origin: str | None = Field(None, examples=["Seattle, WA"], description="A city from /recommend/options")
+    max_miles: float | None = Field(None, gt=0, le=10000, description="Straight-line miles from origin")
+    temperature: str | None = Field(None, examples=["mild"], description="cool, mild or warm")
+    scenery: list[str] = Field(default_factory=list, max_length=13, examples=[["mountains", "lakes_rivers"]])
+    wildlife: list[str] = Field(default_factory=list, max_length=10, examples=[["elk"]])
+    amenities: list[str] = Field(default_factory=list, max_length=7, examples=[["campground"]])
+    include_poor_weather: bool = Field(False, description="Also rank parks whose weather that month is Poor")
+    limit: int = Field(6, ge=1, le=63)

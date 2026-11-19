@@ -16,7 +16,7 @@ from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app import API_VERSION
-from app.api import health, model_performance, parks, weather
+from app.api import health, model_performance, parks, recommend, weather
 from app.config import get_settings
 from app.database.connection import init_db
 from app.services.errors import ParkWiseError
@@ -101,6 +101,7 @@ app.include_router(health.router, prefix="/api")
 app.include_router(parks.router, prefix="/api")
 app.include_router(weather.router, prefix="/api")
 app.include_router(model_performance.router, prefix="/api")
+app.include_router(recommend.router, prefix="/api")
 
 
 @app.get("/", include_in_schema=False)

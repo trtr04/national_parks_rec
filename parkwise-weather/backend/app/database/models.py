@@ -20,6 +20,7 @@ from sqlalchemy import (
     DateTime,
     Float,
     ForeignKey,
+    JSON,
     Index,
     Integer,
     String,
@@ -123,4 +124,40 @@ class WeatherPrediction(Base):
             name="ck_wp_score_range",
         ),
         Index("ix_weather_predictions_park_target", "park_code", "target_date"),
+    )
+
+
+class ParkFeatures(Base):
+    """
+    What each park offers, for the park recommender (one row per park).
+
+    Filled from the NPS API by scripts/load_park_features.py. Topics and activities are
+    stored exactly as NPS names them; app/services/park_recommender.py maps them to the
+    scenery and wildlife choices users see, so the mapping can change without reloading.
+    """
+
+    __tablename__ = "park_features"
+
+    park_code: Mapped[str] = mapped_column(
+        String(10), ForeignKey("parks.park_code", ondelete="CASCADE"), primary_key=True
+    )
+    topics: Mapped[list] = mapped_column(JSON, nullable=False)        # NPS topic names
+    activities: Mapped[list] = mapped_column(JSON, nullable=False)    # NPS activity names
+    campground_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    campgrounds_with_showers: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    # 12 numbers, January first: how many campgrounds are open for most of each month,
+    # from the seasonal closures NPS lists. A campground with no listed closure counts as open.
+    campground_open_months: Mapped[list | None] = mapped_column(JSON)
+    visitor_center_count: Mapped[int | None] = mapped_column(Integer)  # None = not loaded
+    vehicle_fee_usd: Mapped[float | None] = mapped_column(Float)      # None = NPS lists no vehicle fee
+    nps_url: Mapped[str | None] = mapped_column(String(300))
+    image_url: Mapped[str | None] = mapped_column(String(500))
+    image_alt: Mapped[str | None] = mapped_column(Text)
+    image_credit: Mapped[str | None] = mapped_column(String(300))
+    updated_at: Mapped[dt.datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
+    )
+
+    __table_args__ = (
+        CheckConstraint("campground_count >= 0", name="ck_pf_campgrounds_nonneg"),
     )

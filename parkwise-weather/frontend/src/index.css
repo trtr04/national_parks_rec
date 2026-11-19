@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+/*
+  ParkWise design tokens.
+  Palette is drawn from a ranger's field map: cool sage paper, spruce forest,
+  a weather-sky blue for data, and ochre for scores and cautions.
+  Tailwind v4 turns each --color-* below into utilities like bg-spruce, text-ink.
+*/
+@theme {
+  --color-paper: #edf0ea;
+  --color-paper-raised: #f8faf6;
+  --color-line: #d3dbd1;
+  --color-ink: #18231e;
+  --color-ink-muted: #4e5c55;
+  --color-spruce: #24503b;
+  --color-spruce-deep: #173527;
+  --color-lichen: #a9bca4;
+  --color-sky: #2e6a8e;
+  --color-sky-soft: #dce8ee;
+  --color-ochre: #8a5d12;
+  --color-ochre-soft: #f3e6c8;
+  --color-alert: #9c2f22;
+  --color-alert-soft: #f6dfda;
+
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Public Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Visible keyboard focus everywhere, never on mouse click. */
+  :focus-visible {
+    outline: 3px solid var(--color-sky);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* The one orchestrated motion on the site: ridgelines settle in on first load. */
+@keyframes ridge-rise {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.ridge {
+  animation: ridge-rise 900ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}

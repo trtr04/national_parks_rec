@@ -1,0 +1,3658 @@
+{
+  "trained_at": "2026-11-01T23:38:04+00:00",
+  "selected_model": "seasonal_regression",
+  "selection_rule": "Lowest validation score: sum of temp_max MAE, temp_min MAE and wet-day Brier, each divided by the baseline's. Baseline = 3.0, lower is better.",
+  "split": {
+    "train": [
+      2015,
+      2021
+    ],
+    "validation": [
+      2022,
+      2023
+    ],
+    "test": [
+      2024,
+      2025
+    ]
+  },
+  "rows": {
+    "train": 161091,
+    "validation": 45990,
+    "test": 46053
+  },
+  "parks": 63,
+  "units": {
+    "temp_mae": "\u00b0C",
+    "temp_rmse": "\u00b0C",
+    "wet_brier": "0 (perfect) to 1"
+  },
+  "wet_day_threshold_mm": 1.0,
+  "models": {
+    "seasonal_average": {
+      "label": "Seasonal average (baseline)",
+      "validation": {
+        "temp_max_mae": 3.3699,
+        "temp_max_rmse": 4.4644,
+        "temp_min_mae": 2.9306,
+        "temp_min_rmse": 3.9808,
+        "wet_brier": 0.185,
+        "rows": 45990
+      },
+      "test": {
+        "temp_max_mae": 3.3619,
+        "temp_max_rmse": 4.4583,
+        "temp_min_mae": 2.94,
+        "temp_min_rmse": 4.0474,
+        "wet_brier": 0.1817,
+        "rows": 46053
+      },
+      "validation_score": 3.0,
+      "test_brier_skill_vs_baseline": 0.0
+    },
+    "seasonal_regression": {
+      "label": "Seasonal regression with trend",
+      "validation": {
+        "temp_max_mae": 3.3128,
+        "temp_max_rmse": 4.381,
+        "temp_min_mae": 2.8738,
+        "temp_min_rmse": 3.8975,
+        "wet_brier": 0.1835,
+        "rows": 45990
+      },
+      "test": {
+        "temp_max_mae": 3.3532,
+        "temp_max_rmse": 4.4408,
+        "temp_min_mae": 2.938,
+        "temp_min_rmse": 4.0302,
+        "wet_brier": 0.1799,
+        "rows": 46053
+      },
+      "validation_score": 2.9556,
+      "test_brier_skill_vs_baseline": 0.0097
+    },
+    "random_forest": {
+      "label": "Random forest",
+      "validation": {
+        "temp_max_mae": 3.3882,
+        "temp_max_rmse": 4.4983,
+        "temp_min_mae": 2.9302,
+        "temp_min_rmse": 4.0046,
+        "wet_brier": 0.1872,
+        "rows": 45990
+      },
+      "test": {
+        "temp_max_mae": 3.4233,
+        "temp_max_rmse": 4.5535,
+        "temp_min_mae": 2.9751,
+        "temp_min_rmse": 4.0933,
+        "wet_brier": 0.1837,
+        "rows": 46053
+      },
+      "validation_score": 3.0175,
+      "test_brier_skill_vs_baseline": -0.011
+    }
+  },
+  "interval": {
+    "nominal_coverage": 0.8,
+    "test_coverage": {
+      "temp_max": 0.7785,
+      "temp_min": 0.7871
+    }
+  },
+  "selected_model_test_by_park": [
+    {
+      "park_code": "acad",
+      "temp_max_mae": 3.296,
+      "temp_min_mae": 2.755,
+      "wet_brier": 0.2116
+    },
+    {
+      "park_code": "arch",
+      "temp_max_mae": 3.223,
+      "temp_min_mae": 2.705,
+      "wet_brier": 0.0953
+    },
+    {
+      "park_code": "badl",
+      "temp_max_mae": 5.027,
+      "temp_min_mae": 3.573,
+      "wet_brier": 0.1496
+    },
+    {
+      "park_code": "bibe",
+      "temp_max_mae": 3.579,
+      "temp_min_mae": 2.815,
+      "wet_brier": 0.0647
+    },
+    {
+      "park_code": "bisc",
+      "temp_max_mae": 1.351,
+      "temp_min_mae": 1.935,
+      "wet_brier": 0.2147
+    },
+    {
+      "park_code": "blca",
+      "temp_max_mae": 3.341,
+      "temp_min_mae": 3.398,
+      "wet_brier": 0.2057
+    },
+    {
+      "park_code": "brca",
+      "temp_max_mae": 3.495,
+      "temp_min_mae": 3.072,
+      "wet_brier": 0.1756
+    },
+    {
+      "park_code": "cany",
+      "temp_max_mae": 3.422,
+      "temp_min_mae": 2.931,
+      "wet_brier": 0.0947
+    },
+    {
+      "park_code": "care",
+      "temp_max_mae": 3.225,
+      "temp_min_mae": 2.547,
+      "wet_brier": 0.1011
+    },
+    {
+      "park_code": "cave",
+      "temp_max_mae": 4.156,
+      "temp_min_mae": 3.078,
+      "wet_brier": 0.0901
+    },
+    {
+      "park_code": "chir",
+      "temp_max_mae": 3.207,
+      "temp_min_mae": 2.661,
+      "wet_brier": 0.1272
+    },
+    {
+      "park_code": "chis",
+      "temp_max_mae": 1.644,
+      "temp_min_mae": 1.082,
+      "wet_brier": 0.091
+    },
+    {
+      "park_code": "cong",
+      "temp_max_mae": 3.257,
+      "temp_min_mae": 2.993,
+      "wet_brier": 0.1991
+    },
+    {
+      "park_code": "crla",
+      "temp_max_mae": 3.807,
+      "temp_min_mae": 2.809,
+      "wet_brier": 0.2088
+    },
+    {
+      "park_code": "cuva",
+      "temp_max_mae": 4.226,
+      "temp_min_mae": 3.494,
+      "wet_brier": 0.2416
+    },
+    {
+      "park_code": "dena",
+      "temp_max_mae": 4.536,
+      "temp_min_mae": 4.465,
+      "wet_brier": 0.2183
+    },
+    {
+      "park_code": "deva",
+      "temp_max_mae": 2.93,
+      "temp_min_mae": 2.917,
+      "wet_brier": 0.0385
+    },
+    {
+      "park_code": "drto",
+      "temp_max_mae": 0.995,
+      "temp_min_mae": 1.268,
+      "wet_brier": 0.1832
+    },
+    {
+      "park_code": "ever",
+      "temp_max_mae": 1.328,
+      "temp_min_mae": 1.677,
+      "wet_brier": 0.1804
+    },
+    {
+      "park_code": "gaar",
+      "temp_max_mae": 4.916,
+      "temp_min_mae": 4.58,
+      "wet_brier": 0.2188
+    },
+    {
+      "park_code": "glac",
+      "temp_max_mae": 3.776,
+      "temp_min_mae": 3.453,
+      "wet_brier": 0.2178
+    },
+    {
+      "park_code": "glba",
+      "temp_max_mae": 2.56,
+      "temp_min_mae": 2.742,
+      "wet_brier": 0.2355
+    },
+    {
+      "park_code": "grba",
+      "temp_max_mae": 3.647,
+      "temp_min_mae": 3.361,
+      "wet_brier": 0.1697
+    },
+    {
+      "park_code": "grca",
+      "temp_max_mae": 3.509,
+      "temp_min_mae": 2.808,
+      "wet_brier": 0.1457
+    },
+    {
+      "park_code": "grsa",
+      "temp_max_mae": 3.038,
+      "temp_min_mae": 3.077,
+      "wet_brier": 0.1936
+    },
+    {
+      "park_code": "grsm",
+      "temp_max_mae": 3.264,
+      "temp_min_mae": 3.451,
+      "wet_brier": 0.2391
+    },
+    {
+      "park_code": "grte",
+      "temp_max_mae": 3.584,
+      "temp_min_mae": 3.074,
+      "wet_brier": 0.2155
+    },
+    {
+      "park_code": "gumo",
+      "temp_max_mae": 3.475,
+      "temp_min_mae": 3.045,
+      "wet_brier": 0.1152
+    },
+    {
+      "park_code": "hale",
+      "temp_max_mae": 1.061,
+      "temp_min_mae": 1.128,
+      "wet_brier": 0.1837
+    },
+    {
+      "park_code": "havo",
+      "temp_max_mae": 1.249,
+      "temp_min_mae": 0.866,
+      "wet_brier": 0.2427
+    },
+    {
+      "park_code": "hosp",
+      "temp_max_mae": 3.752,
+      "temp_min_mae": 3.291,
+      "wet_brier": 0.207
+    },
+    {
+      "park_code": "indu",
+      "temp_max_mae": 4.281,
+      "temp_min_mae": 3.371,
+      "wet_brier": 0.2285
+    },
+    {
+      "park_code": "isro",
+      "temp_max_mae": 3.35,
+      "temp_min_mae": 2.96,
+      "wet_brier": 0.2216
+    },
+    {
+      "park_code": "jeff",
+      "temp_max_mae": 4.191,
+      "temp_min_mae": 3.681,
+      "wet_brier": 0.209
+    },
+    {
+      "park_code": "jotr",
+      "temp_max_mae": 3.088,
+      "temp_min_mae": 2.858,
+      "wet_brier": 0.0769
+    },
+    {
+      "park_code": "katm",
+      "temp_max_mae": 3.425,
+      "temp_min_mae": 4.208,
+      "wet_brier": 0.2446
+    },
+    {
+      "park_code": "kefj",
+      "temp_max_mae": 3.114,
+      "temp_min_mae": 3.3,
+      "wet_brier": 0.244
+    },
+    {
+      "park_code": "kova",
+      "temp_max_mae": 4.546,
+      "temp_min_mae": 4.568,
+      "wet_brier": 0.208
+    },
+    {
+      "park_code": "lacl",
+      "temp_max_mae": 3.528,
+      "temp_min_mae": 3.653,
+      "wet_brier": 0.2424
+    },
+    {
+      "park_code": "lavo",
+      "temp_max_mae": 3.719,
+      "temp_min_mae": 3.39,
+      "wet_brier": 0.1821
+    },
+    {
+      "park_code": "maca",
+      "temp_max_mae": 3.737,
+      "temp_min_mae": 3.673,
+      "wet_brier": 0.2268
+    },
+    {
+      "park_code": "meve",
+      "temp_max_mae": 3.379,
+      "temp_min_mae": 2.71,
+      "wet_brier": 0.1615
+    },
+    {
+      "park_code": "mora",
+      "temp_max_mae": 3.597,
+      "temp_min_mae": 3.034,
+      "wet_brier": 0.2151
+    },
+    {
+      "park_code": "neri",
+      "temp_max_mae": 4.13,
+      "temp_min_mae": 3.575,
+      "wet_brier": 0.2419
+    },
+    {
+      "park_code": "noca",
+      "temp_max_mae": 3.595,
+      "temp_min_mae": 3.111,
+      "wet_brier": 0.2247
+    },
+    {
+      "park_code": "npsa",
+      "temp_max_mae": 0.615,
+      "temp_min_mae": 0.734,
+      "wet_brier": 0.1665
+    },
+    {
+      "park_code": "olym",
+      "temp_max_mae": 3.34,
+      "temp_min_mae": 2.486,
+      "wet_brier": 0.2182
+    },
+    {
+      "park_code": "pefo",
+      "temp_max_mae": 3.248,
+      "temp_min_mae": 2.381,
+      "wet_brier": 0.1033
+    },
+    {
+      "park_code": "pinn",
+      "temp_max_mae": 3.466,
+      "temp_min_mae": 2.416,
+      "wet_brier": 0.0962
+    },
+    {
+      "park_code": "redw",
+      "temp_max_mae": 2.245,
+      "temp_min_mae": 1.825,
+      "wet_brier": 0.1665
+    },
+    {
+      "park_code": "romo",
+      "temp_max_mae": 3.886,
+      "temp_min_mae": 3.291,
+      "wet_brier": 0.2279
+    },
+    {
+      "park_code": "sagu",
+      "temp_max_mae": 3.571,
+      "temp_min_mae": 2.411,
+      "wet_brier": 0.1089
+    },
+    {
+      "park_code": "seki",
+      "temp_max_mae": 3.414,
+      "temp_min_mae": 2.887,
+      "wet_brier": 0.1787
+    },
+    {
+      "park_code": "shen",
+      "temp_max_mae": 3.76,
+      "temp_min_mae": 3.352,
+      "wet_brier": 0.2196
+    },
+    {
+      "park_code": "thro",
+      "temp_max_mae": 5.337,
+      "temp_min_mae": 4.172,
+      "wet_brier": 0.1722
+    },
+    {
+      "park_code": "viis",
+      "temp_max_mae": 1.111,
+      "temp_min_mae": 1.156,
+      "wet_brier": 0.2582
+    },
+    {
+      "park_code": "voya",
+      "temp_max_mae": 4.585,
+      "temp_min_mae": 3.86,
+      "wet_brier": 0.221
+    },
+    {
+      "park_code": "whsa",
+      "temp_max_mae": 3.258,
+      "temp_min_mae": 2.422,
+      "wet_brier": 0.0911
+    },
+    {
+      "park_code": "wica",
+      "temp_max_mae": 4.834,
+      "temp_min_mae": 3.786,
+      "wet_brier": 0.165
+    },
+    {
+      "park_code": "wrst",
+      "temp_max_mae": 3.995,
+      "temp_min_mae": 3.679,
+      "wet_brier": 0.2358
+    },
+    {
+      "park_code": "yell",
+      "temp_max_mae": 3.847,
+      "temp_min_mae": 3.507,
+      "wet_brier": 0.2211
+    },
+    {
+      "park_code": "yose",
+      "temp_max_mae": 3.673,
+      "temp_min_mae": 2.978,
+      "wet_brier": 0.1534
+    },
+    {
+      "park_code": "zion",
+      "temp_max_mae": 3.514,
+      "temp_min_mae": 2.607,
+      "wet_brier": 0.13
+    }
+  ],
+  "selected_model_test_by_month": [
+    {
+      "month": 1,
+      "temp_max_mae": 4.016,
+      "wet_brier": 0.1885
+    },
+    {
+      "month": 2,
+      "temp_max_mae": 4.128,
+      "wet_brier": 0.1899
+    },
+    {
+      "month": 3,
+      "temp_max_mae": 3.701,
+      "wet_brier": 0.2002
+    },
+    {
+      "month": 4,
+      "temp_max_mae": 3.551,
+      "wet_brier": 0.1857
+    },
+    {
+      "month": 5,
+      "temp_max_mae": 3.028,
+      "wet_brier": 0.1842
+    },
+    {
+      "month": 6,
+      "temp_max_mae": 2.905,
+      "wet_brier": 0.1741
+    },
+    {
+      "month": 7,
+      "temp_max_mae": 2.452,
+      "wet_brier": 0.1703
+    },
+    {
+      "month": 8,
+      "temp_max_mae": 2.499,
+      "wet_brier": 0.1791
+    },
+    {
+      "month": 9,
+      "temp_max_mae": 2.724,
+      "wet_brier": 0.171
+    },
+    {
+      "month": 10,
+      "temp_max_mae": 3.253,
+      "wet_brier": 0.1694
+    },
+    {
+      "month": 11,
+      "temp_max_mae": 3.409,
+      "wet_brier": 0.1798
+    },
+    {
+      "month": 12,
+      "temp_max_mae": 4.608,
+      "wet_brier": 0.1674
+    }
+  ],
+  "test_temp_max_mae_by_month": {
+    "seasonal_average": [
+      4.04,
+      4.315,
+      3.63,
+      3.579,
+      3.097,
+      2.765,
+      2.486,
+      2.545,
+      2.611,
+      3.26,
+      3.448,
+      4.608
+    ],
+    "seasonal_regression": [
+      4.016,
+      4.128,
+      3.701,
+      3.551,
+      3.028,
+      2.905,
+      2.452,
+      2.499,
+      2.724,
+      3.253,
+      3.409,
+      4.608
+    ],
+    "random_forest": [
+      4.146,
+      4.562,
+      3.762,
+      3.754,
+      3.064,
+      2.789,
+      2.508,
+      2.516,
+      2.586,
+      3.315,
+      3.536,
+      4.599
+    ]
+  },
+  "selected_model_test_error_histogram": {
+    "bin_start_c": [
+      -15,
+      -14,
+      -13,
+      -12,
+      -11,
+      -10,
+      -9,
+      -8,
+      -7,
+      -6,
+      -5,
+      -4,
+      -3,
+      -2,
+      -1,
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "count": [
+      93,
+      71,
+      124,
+      202,
+      316,
+      515,
+      783,
+      1077,
+      1587,
+      2060,
+      2513,
+      3262,
+      3904,
+      5193,
+      5514,
+      4588,
+      3715,
+      2776,
+      2133,
+      1568,
+      1178,
+      912,
+      607,
+      388,
+      270,
+      207,
+      130,
+      96,
+      61,
+      210
+    ],
+    "within_3c": 0.5578
+  },
+  "selected_model_test_sample": [
+    {
+      "park_code": "zion",
+      "date": "2024-11-10",
+      "actual": 18.3,
+      "predicted": 15.7
+    },
+    {
+      "park_code": "shen",
+      "date": "2025-12-26",
+      "actual": 1.5,
+      "predicted": 2.2
+    },
+    {
+      "park_code": "blca",
+      "date": "2024-10-28",
+      "actual": 16.4,
+      "predicted": 10.6
+    },
+    {
+      "park_code": "zion",
+      "date": "2024-10-20",
+      "actual": 17.0,
+      "predicted": 21.2
+    },
+    {
+      "park_code": "glac",
+      "date": "2024-08-12",
+      "actual": 26.7,
+      "predicted": 26.7
+    },
+    {
+      "park_code": "kova",
+      "date": "2024-05-30",
+      "actual": 15.3,
+      "predicted": 12.2
+    },
+    {
+      "park_code": "badl",
+      "date": "2024-12-21",
+      "actual": 10.8,
+      "predicted": 2.2
+    },
+    {
+      "park_code": "bibe",
+      "date": "2024-09-14",
+      "actual": 30.7,
+      "predicted": 30.6
+    },
+    {
+      "park_code": "mora",
+      "date": "2025-09-18",
+      "actual": 18.3,
+      "predicted": 14.2
+    },
+    {
+      "park_code": "gumo",
+      "date": "2024-02-22",
+      "actual": 15.6,
+      "predicted": 13.6
+    },
+    {
+      "park_code": "badl",
+      "date": "2024-03-02",
+      "actual": 17.9,
+      "predicted": 6.6
+    },
+    {
+      "park_code": "romo",
+      "date": "2025-07-16",
+      "actual": 20.4,
+      "predicted": 23.7
+    },
+    {
+      "park_code": "cong",
+      "date": "2025-08-23",
+      "actual": 25.7,
+      "predicted": 31.7
+    },
+    {
+      "park_code": "yell",
+      "date": "2024-01-01",
+      "actual": -0.4,
+      "predicted": -5.4
+    },
+    {
+      "park_code": "deva",
+      "date": "2024-08-26",
+      "actual": 39.0,
+      "predicted": 41.5
+    },
+    {
+      "park_code": "katm",
+      "date": "2024-11-21",
+      "actual": 2.0,
+      "predicted": -2.5
+    },
+    {
+      "park_code": "grba",
+      "date": "2025-12-11",
+      "actual": 13.1,
+      "predicted": 2.1
+    },
+    {
+      "park_code": "grte",
+      "date": "2025-11-08",
+      "actual": 4.3,
+      "predicted": 3.5
+    },
+    {
+      "park_code": "neri",
+      "date": "2024-05-31",
+      "actual": 20.8,
+      "predicted": 22.6
+    },
+    {
+      "park_code": "grsa",
+      "date": "2025-12-10",
+      "actual": 5.4,
+      "predicted": 0.8
+    },
+    {
+      "park_code": "grsa",
+      "date": "2025-10-29",
+      "actual": 9.2,
+      "predicted": 10.6
+    },
+    {
+      "park_code": "cany",
+      "date": "2025-08-01",
+      "actual": 34.0,
+      "predicted": 34.0
+    },
+    {
+      "park_code": "havo",
+      "date": "2024-07-13",
+      "actual": 23.2,
+      "predicted": 22.0
+    },
+    {
+      "park_code": "zion",
+      "date": "2025-09-21",
+      "actual": 28.5,
+      "predicted": 28.1
+    },
+    {
+      "park_code": "shen",
+      "date": "2025-09-22",
+      "actual": 19.1,
+      "predicted": 19.1
+    },
+    {
+      "park_code": "cany",
+      "date": "2025-11-10",
+      "actual": 15.8,
+      "predicted": 11.8
+    },
+    {
+      "park_code": "drto",
+      "date": "2025-06-10",
+      "actual": 28.8,
+      "predicted": 27.8
+    },
+    {
+      "park_code": "neri",
+      "date": "2025-04-14",
+      "actual": 23.5,
+      "predicted": 15.9
+    },
+    {
+      "park_code": "blca",
+      "date": "2025-02-21",
+      "actual": 0.7,
+      "predicted": 2.0
+    },
+    {
+      "park_code": "sagu",
+      "date": "2025-10-30",
+      "actual": 29.8,
+      "predicted": 25.9
+    },
+    {
+      "park_code": "havo",
+      "date": "2024-11-25",
+      "actual": 20.7,
+      "predicted": 19.7
+    },
+    {
+      "park_code": "blca",
+      "date": "2024-03-18",
+      "actual": 5.5,
+      "predicted": 5.2
+    },
+    {
+      "park_code": "thro",
+      "date": "2024-02-28",
+      "actual": 5.9,
+      "predicted": 1.7
+    },
+    {
+      "park_code": "wica",
+      "date": "2024-02-14",
+      "actual": -0.7,
+      "predicted": 3.3
+    },
+    {
+      "park_code": "jotr",
+      "date": "2024-06-30",
+      "actual": 36.9,
+      "predicted": 34.5
+    },
+    {
+      "park_code": "yell",
+      "date": "2025-12-02",
+      "actual": -4.5,
+      "predicted": -3.3
+    },
+    {
+      "park_code": "zion",
+      "date": "2025-03-10",
+      "actual": 18.0,
+      "predicted": 13.1
+    },
+    {
+      "park_code": "indu",
+      "date": "2025-01-07",
+      "actual": -1.4,
+      "predicted": 1.0
+    },
+    {
+      "park_code": "hosp",
+      "date": "2024-07-20",
+      "actual": 29.9,
+      "predicted": 33.1
+    },
+    {
+      "park_code": "katm",
+      "date": "2025-10-15",
+      "actual": 6.4,
+      "predicted": 4.2
+    },
+    {
+      "park_code": "grte",
+      "date": "2025-09-18",
+      "actual": 20.2,
+      "predicted": 17.9
+    },
+    {
+      "park_code": "havo",
+      "date": "2025-01-24",
+      "actual": 20.2,
+      "predicted": 18.2
+    },
+    {
+      "park_code": "wrst",
+      "date": "2025-12-28",
+      "actual": -17.7,
+      "predicted": -8.2
+    },
+    {
+      "park_code": "wrst",
+      "date": "2025-04-04",
+      "actual": 6.0,
+      "predicted": -0.7
+    },
+    {
+      "park_code": "sagu",
+      "date": "2025-08-23",
+      "actual": 40.1,
+      "predicted": 34.0
+    },
+    {
+      "park_code": "olym",
+      "date": "2025-08-07",
+      "actual": 17.8,
+      "predicted": 23.8
+    },
+    {
+      "park_code": "chir",
+      "date": "2024-09-24",
+      "actual": 30.0,
+      "predicted": 26.3
+    },
+    {
+      "park_code": "olym",
+      "date": "2025-02-11",
+      "actual": 3.5,
+      "predicted": 7.4
+    },
+    {
+      "park_code": "meve",
+      "date": "2024-03-08",
+      "actual": 6.6,
+      "predicted": 6.6
+    },
+    {
+      "park_code": "redw",
+      "date": "2024-05-10",
+      "actual": 25.6,
+      "predicted": 15.6
+    },
+    {
+      "park_code": "cong",
+      "date": "2024-04-28",
+      "actual": 25.0,
+      "predicted": 26.0
+    },
+    {
+      "park_code": "voya",
+      "date": "2024-03-13",
+      "actual": 8.4,
+      "predicted": -0.9
+    },
+    {
+      "park_code": "mora",
+      "date": "2025-08-31",
+      "actual": 21.2,
+      "predicted": 17.9
+    },
+    {
+      "park_code": "romo",
+      "date": "2025-05-11",
+      "actual": 20.8,
+      "predicted": 11.5
+    },
+    {
+      "park_code": "gaar",
+      "date": "2024-12-29",
+      "actual": -27.0,
+      "predicted": -17.6
+    },
+    {
+      "park_code": "yell",
+      "date": "2024-12-05",
+      "actual": 6.0,
+      "predicted": -3.8
+    },
+    {
+      "park_code": "grca",
+      "date": "2025-03-01",
+      "actual": 12.6,
+      "predicted": 7.0
+    },
+    {
+      "park_code": "cany",
+      "date": "2025-07-22",
+      "actual": 31.9,
+      "predicted": 34.3
+    },
+    {
+      "park_code": "grca",
+      "date": "2024-09-03",
+      "actual": 27.2,
+      "predicted": 25.1
+    },
+    {
+      "park_code": "voya",
+      "date": "2024-05-02",
+      "actual": 10.7,
+      "predicted": 13.5
+    },
+    {
+      "park_code": "arch",
+      "date": "2025-09-21",
+      "actual": 31.0,
+      "predicted": 28.3
+    },
+    {
+      "park_code": "ever",
+      "date": "2025-04-30",
+      "actual": 27.5,
+      "predicted": 27.9
+    },
+    {
+      "park_code": "dena",
+      "date": "2025-09-25",
+      "actual": 3.2,
+      "predicted": 6.5
+    },
+    {
+      "park_code": "grba",
+      "date": "2025-07-15",
+      "actual": 32.3,
+      "predicted": 28.4
+    },
+    {
+      "park_code": "kefj",
+      "date": "2025-09-17",
+      "actual": 12.1,
+      "predicted": 11.2
+    },
+    {
+      "park_code": "hosp",
+      "date": "2024-04-13",
+      "actual": 25.2,
+      "predicted": 21.1
+    },
+    {
+      "park_code": "ever",
+      "date": "2024-07-12",
+      "actual": 29.8,
+      "predicted": 30.2
+    },
+    {
+      "park_code": "isro",
+      "date": "2024-05-18",
+      "actual": 17.5,
+      "predicted": 9.8
+    },
+    {
+      "park_code": "npsa",
+      "date": "2024-07-22",
+      "actual": 28.0,
+      "predicted": 26.9
+    },
+    {
+      "park_code": "bisc",
+      "date": "2025-01-11",
+      "actual": 26.1,
+      "predicted": 24.0
+    },
+    {
+      "park_code": "romo",
+      "date": "2024-01-18",
+      "actual": 0.6,
+      "predicted": -0.7
+    },
+    {
+      "park_code": "hosp",
+      "date": "2025-03-07",
+      "actual": 21.6,
+      "predicted": 15.6
+    },
+    {
+      "park_code": "sagu",
+      "date": "2025-10-17",
+      "actual": 24.0,
+      "predicted": 28.4
+    },
+    {
+      "park_code": "lavo",
+      "date": "2024-07-19",
+      "actual": 28.4,
+      "predicted": 24.7
+    },
+    {
+      "park_code": "kefj",
+      "date": "2024-11-03",
+      "actual": 3.6,
+      "predicted": 1.0
+    },
+    {
+      "park_code": "kefj",
+      "date": "2025-11-25",
+      "actual": -5.2,
+      "predicted": -1.5
+    },
+    {
+      "park_code": "indu",
+      "date": "2025-03-03",
+      "actual": 8.0,
+      "predicted": 4.3
+    },
+    {
+      "park_code": "cong",
+      "date": "2025-05-05",
+      "actual": 25.5,
+      "predicted": 26.7
+    },
+    {
+      "park_code": "gaar",
+      "date": "2024-09-26",
+      "actual": -2.4,
+      "predicted": 0.3
+    },
+    {
+      "park_code": "bibe",
+      "date": "2024-10-11",
+      "actual": 30.6,
+      "predicted": 27.1
+    },
+    {
+      "park_code": "care",
+      "date": "2024-11-14",
+      "actual": 5.9,
+      "predicted": 9.2
+    },
+    {
+      "park_code": "shen",
+      "date": "2024-08-14",
+      "actual": 21.0,
+      "predicted": 24.4
+    },
+    {
+      "park_code": "lavo",
+      "date": "2024-09-28",
+      "actual": 22.8,
+      "predicted": 17.0
+    },
+    {
+      "park_code": "glba",
+      "date": "2025-11-01",
+      "actual": 6.5,
+      "predicted": 5.7
+    },
+    {
+      "park_code": "maca",
+      "date": "2024-08-21",
+      "actual": 24.4,
+      "predicted": 29.9
+    },
+    {
+      "park_code": "viis",
+      "date": "2025-07-22",
+      "actual": 28.8,
+      "predicted": 27.9
+    },
+    {
+      "park_code": "indu",
+      "date": "2025-09-13",
+      "actual": 25.1,
+      "predicted": 23.5
+    },
+    {
+      "park_code": "seki",
+      "date": "2024-09-10",
+      "actual": 23.8,
+      "predicted": 22.1
+    },
+    {
+      "park_code": "isro",
+      "date": "2025-07-26",
+      "actual": 23.4,
+      "predicted": 19.5
+    },
+    {
+      "park_code": "whsa",
+      "date": "2025-07-04",
+      "actual": 33.3,
+      "predicted": 34.9
+    },
+    {
+      "park_code": "romo",
+      "date": "2024-03-23",
+      "actual": 6.5,
+      "predicted": 3.3
+    },
+    {
+      "park_code": "pinn",
+      "date": "2025-03-03",
+      "actual": 13.2,
+      "predicted": 17.0
+    },
+    {
+      "park_code": "gaar",
+      "date": "2025-02-20",
+      "actual": -19.6,
+      "predicted": -16.7
+    },
+    {
+      "park_code": "cave",
+      "date": "2025-01-04",
+      "actual": 23.7,
+      "predicted": 12.6
+    },
+    {
+      "park_code": "arch",
+      "date": "2024-08-18",
+      "actual": 32.2,
+      "predicted": 35.0
+    },
+    {
+      "park_code": "pefo",
+      "date": "2025-09-09",
+      "actual": 30.7,
+      "predicted": 27.9
+    },
+    {
+      "park_code": "glba",
+      "date": "2024-01-24",
+      "actual": 3.4,
+      "predicted": 1.3
+    },
+    {
+      "park_code": "glba",
+      "date": "2025-01-18",
+      "actual": 1.2,
+      "predicted": 1.3
+    },
+    {
+      "park_code": "blca",
+      "date": "2025-08-19",
+      "actual": 30.3,
+      "predicted": 26.2
+    },
+    {
+      "park_code": "maca",
+      "date": "2025-08-16",
+      "actual": 34.5,
+      "predicted": 30.3
+    },
+    {
+      "park_code": "cany",
+      "date": "2024-04-08",
+      "actual": 13.6,
+      "predicted": 17.2
+    },
+    {
+      "park_code": "yose",
+      "date": "2024-12-04",
+      "actual": 18.3,
+      "predicted": 11.7
+    },
+    {
+      "park_code": "care",
+      "date": "2025-09-27",
+      "actual": 23.0,
+      "predicted": 23.4
+    },
+    {
+      "park_code": "grte",
+      "date": "2025-10-05",
+      "actual": 5.5,
+      "predicted": 13.0
+    },
+    {
+      "park_code": "badl",
+      "date": "2025-09-28",
+      "actual": 31.5,
+      "predicted": 21.8
+    },
+    {
+      "park_code": "bibe",
+      "date": "2025-02-06",
+      "actual": 30.2,
+      "predicted": 18.3
+    },
+    {
+      "park_code": "grsm",
+      "date": "2024-01-20",
+      "actual": -18.9,
+      "predicted": 1.1
+    },
+    {
+      "park_code": "drto",
+      "date": "2025-08-04",
+      "actual": 30.5,
+      "predicted": 29.6
+    },
+    {
+      "park_code": "meve",
+      "date": "2025-09-23",
+      "actual": 18.3,
+      "predicted": 21.6
+    },
+    {
+      "park_code": "voya",
+      "date": "2024-07-27",
+      "actual": 30.2,
+      "predicted": 25.3
+    },
+    {
+      "park_code": "jotr",
+      "date": "2024-10-30",
+      "actual": 17.0,
+      "predicted": 22.1
+    },
+    {
+      "park_code": "crla",
+      "date": "2024-07-26",
+      "actual": 20.3,
+      "predicted": 22.1
+    },
+    {
+      "park_code": "grsa",
+      "date": "2024-07-25",
+      "actual": 27.6,
+      "predicted": 26.0
+    },
+    {
+      "park_code": "blca",
+      "date": "2024-08-18",
+      "actual": 27.2,
+      "predicted": 26.2
+    },
+    {
+      "park_code": "lacl",
+      "date": "2025-03-13",
+      "actual": -0.4,
+      "predicted": -1.6
+    },
+    {
+      "park_code": "deva",
+      "date": "2025-07-29",
+      "actual": 41.8,
+      "predicted": 44.1
+    },
+    {
+      "park_code": "jotr",
+      "date": "2024-02-27",
+      "actual": 17.5,
+      "predicted": 17.5
+    },
+    {
+      "park_code": "cave",
+      "date": "2025-09-14",
+      "actual": 29.0,
+      "predicted": 29.1
+    },
+    {
+      "park_code": "cany",
+      "date": "2025-11-07",
+      "actual": 16.6,
+      "predicted": 12.7
+    },
+    {
+      "park_code": "care",
+      "date": "2025-11-20",
+      "actual": 8.2,
+      "predicted": 7.8
+    },
+    {
+      "park_code": "voya",
+      "date": "2024-06-12",
+      "actual": 24.2,
+      "predicted": 22.3
+    },
+    {
+      "park_code": "grsm",
+      "date": "2024-03-30",
+      "actual": 11.6,
+      "predicted": 8.3
+    },
+    {
+      "park_code": "dena",
+      "date": "2024-09-07",
+      "actual": 12.6,
+      "predicted": 10.8
+    },
+    {
+      "park_code": "voya",
+      "date": "2025-08-16",
+      "actual": 21.8,
+      "predicted": 23.9
+    },
+    {
+      "park_code": "grca",
+      "date": "2024-01-08",
+      "actual": -7.8,
+      "predicted": 2.5
+    },
+    {
+      "park_code": "ever",
+      "date": "2024-10-06",
+      "actual": 27.2,
+      "predicted": 29.0
+    },
+    {
+      "park_code": "gumo",
+      "date": "2025-10-30",
+      "actual": 17.4,
+      "predicted": 18.1
+    },
+    {
+      "park_code": "maca",
+      "date": "2024-08-28",
+      "actual": 36.5,
+      "predicted": 29.3
+    },
+    {
+      "park_code": "indu",
+      "date": "2025-08-24",
+      "actual": 21.4,
+      "predicted": 25.9
+    },
+    {
+      "park_code": "pinn",
+      "date": "2024-06-21",
+      "actual": 32.8,
+      "predicted": 31.2
+    },
+    {
+      "park_code": "bibe",
+      "date": "2024-01-05",
+      "actual": 13.1,
+      "predicted": 16.0
+    },
+    {
+      "park_code": "crla",
+      "date": "2024-04-21",
+      "actual": 5.7,
+      "predicted": 4.1
+    },
+    {
+      "park_code": "arch",
+      "date": "2025-11-13",
+      "actual": 21.2,
+      "predicted": 12.5
+    },
+    {
+      "park_code": "isro",
+      "date": "2025-03-30",
+      "actual": -0.7,
+      "predicted": 0.8
+    },
+    {
+      "park_code": "noca",
+      "date": "2025-02-25",
+      "actual": 6.7,
+      "predicted": 7.0
+    },
+    {
+      "park_code": "grsa",
+      "date": "2024-01-04",
+      "actual": -1.6,
+      "predicted": -1.2
+    },
+    {
+      "park_code": "bibe",
+      "date": "2024-09-25",
+      "actual": 29.9,
+      "predicted": 29.3
+    },
+    {
+      "park_code": "grte",
+      "date": "2024-05-06",
+      "actual": 2.5,
+      "predicted": 9.8
+    },
+    {
+      "park_code": "ever",
+      "date": "2025-08-22",
+      "actual": 31.8,
+      "predicted": 30.4
+    },
+    {
+      "park_code": "yose",
+      "date": "2025-11-13",
+      "actual": 14.2,
+      "predicted": 15.0
+    },
+    {
+      "park_code": "drto",
+      "date": "2025-06-11",
+      "actual": 28.7,
+      "predicted": 27.9
+    },
+    {
+      "park_code": "acad",
+      "date": "2024-01-12",
+      "actual": 0.8,
+      "predicted": 0.3
+    },
+    {
+      "park_code": "voya",
+      "date": "2024-06-27",
+      "actual": 21.2,
+      "predicted": 24.2
+    },
+    {
+      "park_code": "brca",
+      "date": "2024-05-14",
+      "actual": 18.1,
+      "predicted": 16.3
+    },
+    {
+      "park_code": "grsm",
+      "date": "2024-03-14",
+      "actual": 15.1,
+      "predicted": 6.2
+    },
+    {
+      "park_code": "grba",
+      "date": "2024-06-05",
+      "actual": 27.9,
+      "predicted": 22.2
+    },
+    {
+      "park_code": "grsa",
+      "date": "2024-06-22",
+      "actual": 22.6,
+      "predicted": 24.1
+    },
+    {
+      "park_code": "chir",
+      "date": "2024-11-20",
+      "actual": 16.9,
+      "predicted": 16.3
+    },
+    {
+      "park_code": "shen",
+      "date": "2025-12-19",
+      "actual": 8.3,
+      "predicted": 2.9
+    },
+    {
+      "park_code": "drto",
+      "date": "2025-06-28",
+      "actual": 29.3,
+      "predicted": 28.7
+    },
+    {
+      "park_code": "grba",
+      "date": "2024-09-04",
+      "actual": 25.1,
+      "predicted": 24.3
+    },
+    {
+      "park_code": "hale",
+      "date": "2025-10-07",
+      "actual": 6.6,
+      "predicted": 10.3
+    },
+    {
+      "park_code": "indu",
+      "date": "2024-11-07",
+      "actual": 11.9,
+      "predicted": 11.0
+    },
+    {
+      "park_code": "cave",
+      "date": "2025-04-28",
+      "actual": 30.0,
+      "predicted": 26.4
+    },
+    {
+      "park_code": "deva",
+      "date": "2024-01-14",
+      "actual": 16.6,
+      "predicted": 16.8
+    },
+    {
+      "park_code": "havo",
+      "date": "2025-06-06",
+      "actual": 20.6,
+      "predicted": 20.8
+    },
+    {
+      "park_code": "grsa",
+      "date": "2024-11-25",
+      "actual": 2.6,
+      "predicted": 3.4
+    },
+    {
+      "park_code": "romo",
+      "date": "2024-05-02",
+      "actual": 6.6,
+      "predicted": 9.8
+    },
+    {
+      "park_code": "noca",
+      "date": "2024-02-26",
+      "actual": 1.8,
+      "predicted": 7.2
+    },
+    {
+      "park_code": "isro",
+      "date": "2024-09-20",
+      "actual": 19.9,
+      "predicted": 15.5
+    },
+    {
+      "park_code": "sagu",
+      "date": "2024-11-18",
+      "actual": 15.5,
+      "predicted": 21.5
+    },
+    {
+      "park_code": "grte",
+      "date": "2024-06-07",
+      "actual": 22.5,
+      "predicted": 17.5
+    },
+    {
+      "park_code": "crla",
+      "date": "2025-03-28",
+      "actual": -2.6,
+      "predicted": 1.4
+    },
+    {
+      "park_code": "chir",
+      "date": "2025-02-13",
+      "actual": 14.6,
+      "predicted": 14.2
+    },
+    {
+      "park_code": "noca",
+      "date": "2025-10-06",
+      "actual": 23.6,
+      "predicted": 17.7
+    },
+    {
+      "park_code": "yose",
+      "date": "2024-10-12",
+      "actual": 23.4,
+      "predicted": 21.5
+    },
+    {
+      "park_code": "drto",
+      "date": "2024-09-24",
+      "actual": 30.0,
+      "predicted": 28.6
+    },
+    {
+      "park_code": "sagu",
+      "date": "2025-05-02",
+      "actual": 29.6,
+      "predicted": 29.4
+    },
+    {
+      "park_code": "gaar",
+      "date": "2024-11-03",
+      "actual": -11.6,
+      "predicted": -10.3
+    },
+    {
+      "park_code": "havo",
+      "date": "2025-11-06",
+      "actual": 23.1,
+      "predicted": 20.5
+    },
+    {
+      "park_code": "grsa",
+      "date": "2024-01-17",
+      "actual": -1.1,
+      "predicted": -0.9
+    },
+    {
+      "park_code": "seki",
+      "date": "2024-04-16",
+      "actual": 10.0,
+      "predicted": 9.4
+    },
+    {
+      "park_code": "grsm",
+      "date": "2024-03-22",
+      "actual": 9.1,
+      "predicted": 7.3
+    },
+    {
+      "park_code": "katm",
+      "date": "2025-01-07",
+      "actual": 2.0,
+      "predicted": -4.0
+    },
+    {
+      "park_code": "olym",
+      "date": "2024-09-13",
+      "actual": 17.8,
+      "predicted": 20.9
+    },
+    {
+      "park_code": "hosp",
+      "date": "2024-08-12",
+      "actual": 28.1,
+      "predicted": 32.8
+    },
+    {
+      "park_code": "grte",
+      "date": "2024-05-30",
+      "actual": 8.5,
+      "predicted": 15.5
+    },
+    {
+      "park_code": "dena",
+      "date": "2025-01-30",
+      "actual": -26.9,
+      "predicted": -11.1
+    },
+    {
+      "park_code": "cuva",
+      "date": "2024-02-19",
+      "actual": 5.8,
+      "predicted": 4.8
+    },
+    {
+      "park_code": "bibe",
+      "date": "2025-10-10",
+      "actual": 27.6,
+      "predicted": 27.4
+    },
+    {
+      "park_code": "acad",
+      "date": "2024-03-25",
+      "actual": 4.0,
+      "predicted": 4.9
+    },
+    {
+      "park_code": "cuva",
+      "date": "2025-12-12",
+      "actual": -1.7,
+      "predicted": 5.3
+    },
+    {
+      "park_code": "bisc",
+      "date": "2025-09-02",
+      "actual": 33.2,
+      "predicted": 30.7
+    },
+    {
+      "park_code": "kefj",
+      "date": "2024-07-03",
+      "actual": 15.5,
+      "predicted": 15.9
+    },
+    {
+      "park_code": "cuva",
+      "date": "2025-09-17",
+      "actual": 27.0,
+      "predicted": 23.9
+    },
+    {
+      "park_code": "crla",
+      "date": "2024-04-04",
+      "actual": -3.3,
+      "predicted": 2.1
+    },
+    {
+      "park_code": "whsa",
+      "date": "2024-10-11",
+      "actual": 31.6,
+      "predicted": 25.3
+    },
+    {
+      "park_code": "indu",
+      "date": "2025-04-22",
+      "actual": 21.3,
+      "predicted": 14.2
+    },
+    {
+      "park_code": "brca",
+      "date": "2024-04-18",
+      "actual": 15.2,
+      "predicted": 10.2
+    },
+    {
+      "park_code": "lacl",
+      "date": "2025-11-07",
+      "actual": -4.2,
+      "predicted": 1.5
+    },
+    {
+      "park_code": "viis",
+      "date": "2025-05-16",
+      "actual": 27.8,
+      "predicted": 26.7
+    },
+    {
+      "park_code": "dena",
+      "date": "2025-09-16",
+      "actual": 13.5,
+      "predicted": 8.8
+    },
+    {
+      "park_code": "deva",
+      "date": "2025-02-05",
+      "actual": 23.2,
+      "predicted": 19.3
+    },
+    {
+      "park_code": "grsm",
+      "date": "2024-06-01",
+      "actual": 13.1,
+      "predicted": 16.3
+    },
+    {
+      "park_code": "drto",
+      "date": "2025-10-14",
+      "actual": 29.1,
+      "predicted": 27.7
+    },
+    {
+      "park_code": "jotr",
+      "date": "2025-12-30",
+      "actual": 16.2,
+      "predicted": 13.3
+    },
+    {
+      "park_code": "bibe",
+      "date": "2024-04-14",
+      "actual": 34.5,
+      "predicted": 28.2
+    },
+    {
+      "park_code": "glba",
+      "date": "2025-02-13",
+      "actual": -0.7,
+      "predicted": 1.6
+    },
+    {
+      "park_code": "meve",
+      "date": "2024-09-30",
+      "actual": 27.6,
+      "predicted": 20.0
+    },
+    {
+      "park_code": "pinn",
+      "date": "2024-04-02",
+      "actual": 21.9,
+      "predicted": 19.2
+    },
+    {
+      "park_code": "zion",
+      "date": "2025-05-07",
+      "actual": 20.2,
+      "predicted": 23.6
+    },
+    {
+      "park_code": "deva",
+      "date": "2025-01-15",
+      "actual": 18.5,
+      "predicted": 16.8
+    },
+    {
+      "park_code": "cave",
+      "date": "2024-05-26",
+      "actual": 33.4,
+      "predicted": 30.9
+    },
+    {
+      "park_code": "shen",
+      "date": "2025-05-18",
+      "actual": 17.0,
+      "predicted": 18.1
+    },
+    {
+      "park_code": "redw",
+      "date": "2024-05-23",
+      "actual": 15.2,
+      "predicted": 16.7
+    },
+    {
+      "park_code": "meve",
+      "date": "2025-11-30",
+      "actual": 3.0,
+      "predicted": 5.2
+    },
+    {
+      "park_code": "indu",
+      "date": "2025-11-20",
+      "actual": 8.3,
+      "predicted": 8.1
+    },
+    {
+      "park_code": "chir",
+      "date": "2024-12-22",
+      "actual": 19.9,
+      "predicted": 11.9
+    },
+    {
+      "park_code": "wrst",
+      "date": "2024-03-13",
+      "actual": -2.6,
+      "predicted": -4.6
+    },
+    {
+      "park_code": "redw",
+      "date": "2024-09-12",
+      "actual": 19.0,
+      "predicted": 20.8
+    },
+    {
+      "park_code": "chis",
+      "date": "2024-12-02",
+      "actual": 15.7,
+      "predicted": 17.0
+    },
+    {
+      "park_code": "blca",
+      "date": "2025-09-14",
+      "actual": 17.9,
+      "predicted": 22.1
+    },
+    {
+      "park_code": "grba",
+      "date": "2025-03-25",
+      "actual": 14.5,
+      "predicted": 7.1
+    },
+    {
+      "park_code": "deva",
+      "date": "2025-01-04",
+      "actual": 17.9,
+      "predicted": 16.1
+    },
+    {
+      "park_code": "hosp",
+      "date": "2025-12-03",
+      "actual": 7.0,
+      "predicted": 13.6
+    },
+    {
+      "park_code": "yell",
+      "date": "2024-09-13",
+      "actual": 10.8,
+      "predicted": 16.9
+    },
+    {
+      "park_code": "neri",
+      "date": "2025-11-05",
+      "actual": 19.3,
+      "predicted": 13.5
+    },
+    {
+      "park_code": "meve",
+      "date": "2025-06-25",
+      "actual": 26.7,
+      "predicted": 27.6
+    },
+    {
+      "park_code": "grte",
+      "date": "2024-07-24",
+      "actual": 30.9,
+      "predicted": 25.4
+    },
+    {
+      "park_code": "grsm",
+      "date": "2024-09-26",
+      "actual": 13.0,
+      "predicted": 15.1
+    },
+    {
+      "park_code": "lacl",
+      "date": "2024-03-29",
+      "actual": 3.1,
+      "predicted": 0.9
+    },
+    {
+      "park_code": "thro",
+      "date": "2025-11-16",
+      "actual": 10.1,
+      "predicted": 5.1
+    },
+    {
+      "park_code": "zion",
+      "date": "2024-04-28",
+      "actual": 19.7,
+      "predicted": 22.0
+    },
+    {
+      "park_code": "viis",
+      "date": "2024-01-13",
+      "actual": 27.0,
+      "predicted": 25.9
+    },
+    {
+      "park_code": "yell",
+      "date": "2024-11-04",
+      "actual": -3.3,
+      "predicted": 1.7
+    },
+    {
+      "park_code": "grca",
+      "date": "2025-06-25",
+      "actual": 25.9,
+      "predicted": 27.4
+    },
+    {
+      "park_code": "cany",
+      "date": "2024-09-08",
+      "actual": 31.9,
+      "predicted": 28.8
+    },
+    {
+      "park_code": "thro",
+      "date": "2025-11-08",
+      "actual": 4.7,
+      "predicted": 7.0
+    },
+    {
+      "park_code": "zion",
+      "date": "2024-12-11",
+      "actual": 11.8,
+      "predicted": 8.8
+    },
+    {
+      "park_code": "hale",
+      "date": "2024-09-18",
+      "actual": 10.9,
+      "predicted": 10.8
+    },
+    {
+      "park_code": "mora",
+      "date": "2024-05-15",
+      "actual": 14.6,
+      "predicted": 8.1
+    },
+    {
+      "park_code": "indu",
+      "date": "2025-03-31",
+      "actual": 8.1,
+      "predicted": 9.4
+    },
+    {
+      "park_code": "drto",
+      "date": "2025-12-14",
+      "actual": 25.4,
+      "predicted": 23.9
+    },
+    {
+      "park_code": "neri",
+      "date": "2024-03-02",
+      "actual": 13.4,
+      "predicted": 9.2
+    },
+    {
+      "park_code": "sagu",
+      "date": "2025-11-19",
+      "actual": 16.9,
+      "predicted": 21.5
+    },
+    {
+      "park_code": "gaar",
+      "date": "2025-11-13",
+      "actual": -16.3,
+      "predicted": -12.3
+    },
+    {
+      "park_code": "havo",
+      "date": "2025-01-29",
+      "actual": 17.5,
+      "predicted": 18.2
+    },
+    {
+      "park_code": "bibe",
+      "date": "2024-09-05",
+      "actual": 26.5,
+      "predicted": 31.5
+    },
+    {
+      "park_code": "olym",
+      "date": "2024-12-20",
+      "actual": 16.3,
+      "predicted": 7.6
+    },
+    {
+      "park_code": "voya",
+      "date": "2025-02-12",
+      "actual": -17.8,
+      "predicted": -7.4
+    },
+    {
+      "park_code": "viis",
+      "date": "2025-06-25",
+      "actual": 28.6,
+      "predicted": 27.6
+    },
+    {
+      "park_code": "romo",
+      "date": "2024-02-04",
+      "actual": 0.4,
+      "predicted": 0.0
+    },
+    {
+      "park_code": "pinn",
+      "date": "2024-12-15",
+      "actual": 13.6,
+      "predicted": 14.9
+    },
+    {
+      "park_code": "pinn",
+      "date": "2025-10-31",
+      "actual": 26.4,
+      "predicted": 22.7
+    },
+    {
+      "park_code": "glba",
+      "date": "2024-07-27",
+      "actual": 13.9,
+      "predicted": 16.9
+    },
+    {
+      "park_code": "lacl",
+      "date": "2025-06-16",
+      "actual": 16.3,
+      "predicted": 16.1
+    },
+    {
+      "park_code": "badl",
+      "date": "2025-11-15",
+      "actual": 17.5,
+      "predicted": 9.0
+    },
+    {
+      "park_code": "voya",
+      "date": "2024-09-24",
+      "actual": 18.4,
+      "predicted": 16.5
+    },
+    {
+      "park_code": "indu",
+      "date": "2024-02-11",
+      "actual": 2.7,
+      "predicted": 1.9
+    },
+    {
+      "park_code": "maca",
+      "date": "2024-08-23",
+      "actual": 31.5,
+      "predicted": 29.8
+    },
+    {
+      "park_code": "yose",
+      "date": "2024-12-28",
+      "actual": 14.4,
+      "predicted": 10.0
+    },
+    {
+      "park_code": "grca",
+      "date": "2025-09-02",
+      "actual": 27.2,
+      "predicted": 25.3
+    },
+    {
+      "park_code": "badl",
+      "date": "2024-06-13",
+      "actual": 26.4,
+      "predicted": 27.0
+    },
+    {
+      "park_code": "grte",
+      "date": "2024-12-01",
+      "actual": 2.5,
+      "predicted": -1.3
+    },
+    {
+      "park_code": "crla",
+      "date": "2025-08-06",
+      "actual": 16.3,
+      "predicted": 22.2
+    },
+    {
+      "park_code": "dena",
+      "date": "2024-03-21",
+      "actual": 3.1,
+      "predicted": -4.9
+    },
+    {
+      "park_code": "olym",
+      "date": "2024-06-24",
+      "actual": 17.5,
+      "predicted": 20.7
+    },
+    {
+      "park_code": "maca",
+      "date": "2025-05-12",
+      "actual": 23.8,
+      "predicted": 24.0
+    },
+    {
+      "park_code": "cong",
+      "date": "2025-09-25",
+      "actual": 33.7,
+      "predicted": 27.8
+    },
+    {
+      "park_code": "grca",
+      "date": "2025-04-17",
+      "actual": 14.4,
+      "predicted": 14.6
+    },
+    {
+      "park_code": "badl",
+      "date": "2025-08-08",
+      "actual": 27.4,
+      "predicted": 31.2
+    },
+    {
+      "park_code": "maca",
+      "date": "2025-06-04",
+      "actual": 29.6,
+      "predicted": 27.5
+    },
+    {
+      "park_code": "chir",
+      "date": "2025-10-31",
+      "actual": 22.9,
+      "predicted": 20.6
+    },
+    {
+      "park_code": "care",
+      "date": "2024-06-21",
+      "actual": 27.8,
+      "predicted": 30.6
+    },
+    {
+      "park_code": "yell",
+      "date": "2025-06-17",
+      "actual": 18.5,
+      "predicted": 17.5
+    },
+    {
+      "park_code": "bisc",
+      "date": "2025-09-01",
+      "actual": 30.6,
+      "predicted": 30.7
+    },
+    {
+      "park_code": "gumo",
+      "date": "2024-05-31",
+      "actual": 29.7,
+      "predicted": 27.9
+    },
+    {
+      "park_code": "chir",
+      "date": "2025-03-26",
+      "actual": 25.0,
+      "predicted": 19.1
+    },
+    {
+      "park_code": "badl",
+      "date": "2025-04-23",
+      "actual": 15.0,
+      "predicted": 15.3
+    },
+    {
+      "park_code": "grba",
+      "date": "2025-01-28",
+      "actual": 0.5,
+      "predicted": 0.8
+    },
+    {
+      "park_code": "grte",
+      "date": "2025-05-11",
+      "actual": 16.5,
+      "predicted": 10.6
+    },
+    {
+      "park_code": "arch",
+      "date": "2025-02-04",
+      "actual": 21.5,
+      "predicted": 7.4
+    },
+    {
+      "park_code": "lavo",
+      "date": "2024-04-15",
+      "actual": 7.2,
+      "predicted": 6.3
+    },
+    {
+      "park_code": "viis",
+      "date": "2024-05-01",
+      "actual": 27.7,
+      "predicted": 26.4
+    },
+    {
+      "park_code": "deva",
+      "date": "2025-02-11",
+      "actual": 17.4,
+      "predicted": 20.2
+    },
+    {
+      "park_code": "lacl",
+      "date": "2025-04-04",
+      "actual": 8.1,
+      "predicted": 1.7
+    },
+    {
+      "park_code": "lavo",
+      "date": "2024-11-16",
+      "actual": 2.3,
+      "predicted": 5.5
+    },
+    {
+      "park_code": "deva",
+      "date": "2024-10-17",
+      "actual": 29.2,
+      "predicted": 29.3
+    },
+    {
+      "park_code": "meve",
+      "date": "2025-10-15",
+      "actual": 18.5,
+      "predicted": 16.7
+    },
+    {
+      "park_code": "viis",
+      "date": "2025-11-05",
+      "actual": 28.7,
+      "predicted": 27.7
+    },
+    {
+      "park_code": "pefo",
+      "date": "2025-11-25",
+      "actual": 10.1,
+      "predicted": 10.8
+    },
+    {
+      "park_code": "yell",
+      "date": "2025-06-29",
+      "actual": 21.7,
+      "predicted": 20.1
+    },
+    {
+      "park_code": "pinn",
+      "date": "2024-03-19",
+      "actual": 23.6,
+      "predicted": 18.1
+    },
+    {
+      "park_code": "chir",
+      "date": "2024-06-11",
+      "actual": 35.2,
+      "predicted": 30.7
+    },
+    {
+      "park_code": "grca",
+      "date": "2025-07-17",
+      "actual": 24.5,
+      "predicted": 28.7
+    },
+    {
+      "park_code": "indu",
+      "date": "2025-10-18",
+      "actual": 24.4,
+      "predicted": 16.2
+    },
+    {
+      "park_code": "deva",
+      "date": "2024-03-03",
+      "actual": 19.8,
+      "predicted": 23.3
+    },
+    {
+      "park_code": "glac",
+      "date": "2024-09-09",
+      "actual": 27.1,
+      "predicted": 21.6
+    },
+    {
+      "park_code": "romo",
+      "date": "2025-02-25",
+      "actual": 8.1,
+      "predicted": 1.2
+    },
+    {
+      "park_code": "brca",
+      "date": "2025-10-01",
+      "actual": 18.9,
+      "predicted": 17.3
+    },
+    {
+      "park_code": "wrst",
+      "date": "2025-09-14",
+      "actual": 12.1,
+      "predicted": 9.9
+    },
+    {
+      "park_code": "pinn",
+      "date": "2024-09-22",
+      "actual": 33.9,
+      "predicted": 30.2
+    },
+    {
+      "park_code": "maca",
+      "date": "2025-07-12",
+      "actual": 32.6,
+      "predicted": 30.7
+    },
+    {
+      "park_code": "zion",
+      "date": "2025-08-27",
+      "actual": 27.1,
+      "predicted": 32.3
+    },
+    {
+      "park_code": "dena",
+      "date": "2025-03-15",
+      "actual": -7.4,
+      "predicted": -6.3
+    },
+    {
+      "park_code": "cuva",
+      "date": "2024-07-22",
+      "actual": 27.5,
+      "predicted": 28.0
+    },
+    {
+      "park_code": "grsm",
+      "date": "2024-01-24",
+      "actual": 6.2,
+      "predicted": 1.2
+    },
+    {
+      "park_code": "havo",
+      "date": "2025-01-08",
+      "actual": 20.9,
+      "predicted": 18.4
+    },
+    {
+      "park_code": "crla",
+      "date": "2024-11-04",
+      "actual": 1.4,
+      "predicted": 4.1
+    },
+    {
+      "park_code": "deva",
+      "date": "2024-04-06",
+      "actual": 21.2,
+      "predicted": 28.0
+    },
+    {
+      "park_code": "grte",
+      "date": "2025-12-06",
+      "actual": 1.5,
+      "predicted": -1.9
+    },
+    {
+      "park_code": "romo",
+      "date": "2025-12-07",
+      "actual": -0.8,
+      "predicted": 1.0
+    },
+    {
+      "park_code": "bibe",
+      "date": "2025-03-22",
+      "actual": 30.0,
+      "predicted": 24.8
+    },
+    {
+      "park_code": "meve",
+      "date": "2025-06-28",
+      "actual": 29.6,
+      "predicted": 28.0
+    },
+    {
+      "park_code": "acad",
+      "date": "2024-03-21",
+      "actual": 3.1,
+      "predicted": 4.3
+    },
+    {
+      "park_code": "crla",
+      "date": "2024-05-31",
+      "actual": 15.3,
+      "predicted": 11.7
+    },
+    {
+      "park_code": "yose",
+      "date": "2024-03-29",
+      "actual": 5.2,
+      "predicted": 12.2
+    },
+    {
+      "park_code": "arch",
+      "date": "2025-07-19",
+      "actual": 36.2,
+      "predicted": 36.9
+    },
+    {
+      "park_code": "chis",
+      "date": "2024-03-13",
+      "actual": 14.9,
+      "predicted": 15.9
+    },
+    {
+      "park_code": "cuva",
+      "date": "2025-06-04",
+      "actual": 31.5,
+      "predicted": 24.2
+    },
+    {
+      "park_code": "ever",
+      "date": "2025-06-10",
+      "actual": 29.3,
+      "predicted": 29.2
+    },
+    {
+      "park_code": "grba",
+      "date": "2025-05-07",
+      "actual": 15.3,
+      "predicted": 15.1
+    },
+    {
+      "park_code": "cuva",
+      "date": "2024-10-28",
+      "actual": 16.4,
+      "predicted": 14.6
+    },
+    {
+      "park_code": "mora",
+      "date": "2024-02-07",
+      "actual": -1.7,
+      "predicted": -1.7
+    },
+    {
+      "park_code": "seki",
+      "date": "2025-10-19",
+      "actual": 17.1,
+      "predicted": 15.4
+    },
+    {
+      "park_code": "kova",
+      "date": "2024-06-23",
+      "actual": 19.0,
+      "predicted": 16.6
+    },
+    {
+      "park_code": "grba",
+      "date": "2024-07-23",
+      "actual": 30.7,
+      "predicted": 28.8
+    },
+    {
+      "park_code": "pefo",
+      "date": "2024-11-27",
+      "actual": 10.3,
+      "predicted": 10.2
+    },
+    {
+      "park_code": "grca",
+      "date": "2025-08-11",
+      "actual": 30.7,
+      "predicted": 27.8
+    },
+    {
+      "park_code": "thro",
+      "date": "2025-06-30",
+      "actual": 26.2,
+      "predicted": 27.5
+    },
+    {
+      "park_code": "yell",
+      "date": "2025-08-18",
+      "actual": 24.9,
+      "predicted": 22.7
+    },
+    {
+      "park_code": "maca",
+      "date": "2025-09-29",
+      "actual": 27.5,
+      "predicted": 24.8
+    },
+    {
+      "park_code": "care",
+      "date": "2025-06-15",
+      "actual": 36.1,
+      "predicted": 29.4
+    },
+    {
+      "park_code": "glba",
+      "date": "2025-01-15",
+      "actual": 2.8,
+      "predicted": 1.3
+    },
+    {
+      "park_code": "cong",
+      "date": "2025-02-12",
+      "actual": 11.3,
+      "predicted": 15.6
+    },
+    {
+      "park_code": "shen",
+      "date": "2025-08-10",
+      "actual": 22.0,
+      "predicted": 24.7
+    },
+    {
+      "park_code": "whsa",
+      "date": "2024-01-21",
+      "actual": 11.6,
+      "predicted": 12.6
+    },
+    {
+      "park_code": "noca",
+      "date": "2024-11-14",
+      "actual": 7.0,
+      "predicted": 8.1
+    },
+    {
+      "park_code": "cave",
+      "date": "2024-10-14",
+      "actual": 27.6,
+      "predicted": 24.1
+    },
+    {
+      "park_code": "grba",
+      "date": "2025-04-15",
+      "actual": 16.7,
+      "predicted": 10.6
+    },
+    {
+      "park_code": "blca",
+      "date": "2025-10-01",
+      "actual": 19.9,
+      "predicted": 18.2
+    },
+    {
+      "park_code": "glba",
+      "date": "2025-09-29",
+      "actual": 15.7,
+      "predicted": 11.2
+    },
+    {
+      "park_code": "yell",
+      "date": "2025-11-17",
+      "actual": 2.3,
+      "predicted": -1.0
+    },
+    {
+      "park_code": "grca",
+      "date": "2025-01-26",
+      "actual": 4.9,
+      "predicted": 3.1
+    },
+    {
+      "park_code": "gaar",
+      "date": "2025-09-05",
+      "actual": 4.4,
+      "predicted": 6.5
+    },
+    {
+      "park_code": "shen",
+      "date": "2025-07-07",
+      "actual": 26.3,
+      "predicted": 24.4
+    },
+    {
+      "park_code": "hale",
+      "date": "2024-02-21",
+      "actual": 5.4,
+      "predicted": 7.4
+    },
+    {
+      "park_code": "yose",
+      "date": "2024-04-03",
+      "actual": 13.2,
+      "predicted": 12.7
+    },
+    {
+      "park_code": "shen",
+      "date": "2024-05-25",
+      "actual": 21.9,
+      "predicted": 19.4
+    },
+    {
+      "park_code": "sagu",
+      "date": "2025-09-05",
+      "actual": 30.1,
+      "predicted": 33.2
+    },
+    {
+      "park_code": "wrst",
+      "date": "2025-07-05",
+      "actual": 18.1,
+      "predicted": 17.3
+    },
+    {
+      "park_code": "grsm",
+      "date": "2025-07-19",
+      "actual": 17.5,
+      "predicted": 19.5
+    },
+    {
+      "park_code": "dena",
+      "date": "2025-04-08",
+      "actual": -8.4,
+      "predicted": -0.7
+    },
+    {
+      "park_code": "npsa",
+      "date": "2025-03-24",
+      "actual": 27.9,
+      "predicted": 28.1
+    },
+    {
+      "park_code": "shen",
+      "date": "2024-06-06",
+      "actual": 23.7,
+      "predicted": 21.1
+    },
+    {
+      "park_code": "grsm",
+      "date": "2024-07-25",
+      "actual": 14.6,
+      "predicted": 19.6
+    },
+    {
+      "park_code": "pefo",
+      "date": "2025-06-12",
+      "actual": 33.2,
+      "predicted": 29.7
+    },
+    {
+      "park_code": "grte",
+      "date": "2025-03-13",
+      "actual": 3.9,
+      "predicted": 1.3
+    },
+    {
+      "park_code": "pefo",
+      "date": "2024-01-14",
+      "actual": 8.5,
+      "predicted": 6.1
+    },
+    {
+      "park_code": "ever",
+      "date": "2024-02-04",
+      "actual": 23.0,
+      "predicted": 23.8
+    },
+    {
+      "park_code": "blca",
+      "date": "2024-08-25",
+      "actual": 22.7,
+      "predicted": 25.4
+    },
+    {
+      "park_code": "redw",
+      "date": "2025-10-03",
+      "actual": 17.2,
+      "predicted": 19.2
+    },
+    {
+      "park_code": "kova",
+      "date": "2025-01-25",
+      "actual": -10.7,
+      "predicted": -16.3
+    },
+    {
+      "park_code": "shen",
+      "date": "2024-12-05",
+      "actual": -0.6,
+      "predicted": 4.6
+    },
+    {
+      "park_code": "kova",
+      "date": "2024-09-20",
+      "actual": 4.8,
+      "predicted": 5.2
+    },
+    {
+      "park_code": "yell",
+      "date": "2024-05-10",
+      "actual": 13.0,
+      "predicted": 8.9
+    },
+    {
+      "park_code": "maca",
+      "date": "2024-04-14",
+      "actual": 26.0,
+      "predicted": 19.3
+    },
+    {
+      "park_code": "redw",
+      "date": "2024-01-06",
+      "actual": 9.2,
+      "predicted": 12.1
+    },
+    {
+      "park_code": "romo",
+      "date": "2025-03-31",
+      "actual": 7.6,
+      "predicted": 4.0
+    },
+    {
+      "park_code": "cong",
+      "date": "2025-12-27",
+      "actual": 24.6,
+      "predicted": 13.8
+    },
+    {
+      "park_code": "jeff",
+      "date": "2025-04-12",
+      "actual": 15.5,
+      "predicted": 17.9
+    },
+    {
+      "park_code": "cany",
+      "date": "2025-01-25",
+      "actual": 3.2,
+      "predicted": 3.6
+    },
+    {
+      "park_code": "care",
+      "date": "2024-03-21",
+      "actual": 15.3,
+      "predicted": 12.7
+    },
+    {
+      "park_code": "lavo",
+      "date": "2025-04-15",
+      "actual": 13.5,
+      "predicted": 6.1
+    },
+    {
+      "park_code": "katm",
+      "date": "2024-06-24",
+      "actual": 17.2,
+      "predicted": 14.1
+    },
+    {
+      "park_code": "pinn",
+      "date": "2024-02-14",
+      "actual": 13.4,
+      "predicted": 16.0
+    },
+    {
+      "park_code": "redw",
+      "date": "2025-05-06",
+      "actual": 19.9,
+      "predicted": 15.2
+    },
+    {
+      "park_code": "wrst",
+      "date": "2024-08-01",
+      "actual": 12.6,
+      "predicted": 17.0
+    },
+    {
+      "park_code": "isro",
+      "date": "2024-10-28",
+      "actual": 13.9,
+      "predicted": 7.4
+    },
+    {
+      "park_code": "chis",
+      "date": "2025-05-21",
+      "actual": 18.5,
+      "predicted": 16.6
+    },
+    {
+      "park_code": "redw",
+      "date": "2025-11-06",
+      "actual": 16.8,
+      "predicted": 15.1
+    },
+    {
+      "park_code": "brca",
+      "date": "2025-11-21",
+      "actual": 3.0,
+      "predicted": 4.8
+    },
+    {
+      "park_code": "deva",
+      "date": "2024-06-01",
+      "actual": 40.1,
+      "predicted": 38.2
+    },
+    {
+      "park_code": "voya",
+      "date": "2024-05-12",
+      "actual": 18.5,
+      "predicted": 16.1
+    },
+    {
+      "park_code": "chir",
+      "date": "2025-02-27",
+      "actual": 17.6,
+      "predicted": 15.8
+    },
+    {
+      "park_code": "lavo",
+      "date": "2025-05-11",
+      "actual": 8.3,
+      "predicted": 10.8
+    },
+    {
+      "park_code": "hale",
+      "date": "2025-09-15",
+      "actual": 9.2,
+      "predicted": 10.9
+    },
+    {
+      "park_code": "katm",
+      "date": "2024-12-10",
+      "actual": 4.2,
+      "predicted": -4.0
+    },
+    {
+      "park_code": "gaar",
+      "date": "2025-07-13",
+      "actual": 17.8,
+      "predicted": 15.2
+    },
+    {
+      "park_code": "pefo",
+      "date": "2024-06-13",
+      "actual": 34.8,
+      "predicted": 30.0
+    },
+    {
+      "park_code": "grca",
+      "date": "2025-10-05",
+      "actual": 18.3,
+      "predicted": 19.5
+    },
+    {
+      "park_code": "ever",
+      "date": "2025-12-22",
+      "actual": 26.6,
+      "predicted": 24.2
+    },
+    {
+      "park_code": "romo",
+      "date": "2025-08-15",
+      "actual": 27.5,
+      "predicted": 23.4
+    },
+    {
+      "park_code": "glac",
+      "date": "2025-02-07",
+      "actual": -6.4,
+      "predicted": -0.5
+    },
+    {
+      "park_code": "cany",
+      "date": "2024-03-19",
+      "actual": 14.9,
+      "predicted": 13.7
+    },
+    {
+      "park_code": "isro",
+      "date": "2024-04-24",
+      "actual": 0.0,
+      "predicted": 5.8
+    },
+    {
+      "park_code": "cany",
+      "date": "2024-10-23",
+      "actual": 17.3,
+      "predicted": 17.1
+    },
+    {
+      "park_code": "glba",
+      "date": "2025-09-13",
+      "actual": 16.1,
+      "predicted": 13.7
+    },
+    {
+      "park_code": "crla",
+      "date": "2024-11-06",
+      "actual": 3.2,
+      "predicted": 3.7
+    },
+    {
+      "park_code": "chis",
+      "date": "2025-08-15",
+      "actual": 18.6,
+      "predicted": 20.2
+    },
+    {
+      "park_code": "gumo",
+      "date": "2024-01-05",
+      "actual": 5.9,
+      "predicted": 9.1
+    },
+    {
+      "park_code": "whsa",
+      "date": "2025-03-10",
+      "actual": 19.4,
+      "predicted": 19.2
+    },
+    {
+      "park_code": "olym",
+      "date": "2024-05-18",
+      "actual": 9.1,
+      "predicted": 16.6
+    },
+    {
+      "park_code": "gumo",
+      "date": "2025-09-29",
+      "actual": 20.0,
+      "predicted": 23.6
+    },
+    {
+      "park_code": "deva",
+      "date": "2024-05-24",
+      "actual": 33.3,
+      "predicted": 36.6
+    },
+    {
+      "park_code": "wrst",
+      "date": "2025-05-12",
+      "actual": 3.6,
+      "predicted": 8.6
+    },
+    {
+      "park_code": "bibe",
+      "date": "2025-12-16",
+      "actual": 20.6,
+      "predicted": 16.9
+    },
+    {
+      "park_code": "yose",
+      "date": "2025-09-17",
+      "actual": 30.0,
+      "predicted": 26.5
+    },
+    {
+      "park_code": "cuva",
+      "date": "2025-10-29",
+      "actual": 13.5,
+      "predicted": 14.6
+    },
+    {
+      "park_code": "grsm",
+      "date": "2024-02-17",
+      "actual": 1.0,
+      "predicted": 3.1
+    },
+    {
+      "park_code": "gumo",
+      "date": "2025-11-08",
+      "actual": 21.3,
+      "predicted": 16.3
+    },
+    {
+      "park_code": "brca",
+      "date": "2025-07-02",
+      "actual": 25.6,
+      "predicted": 25.5
+    },
+    {
+      "park_code": "acad",
+      "date": "2024-11-27",
+      "actual": 7.0,
+      "predicted": 5.6
+    },
+    {
+      "park_code": "jotr",
+      "date": "2024-12-26",
+      "actual": 15.8,
+      "predicted": 13.4
+    },
+    {
+      "park_code": "seki",
+      "date": "2024-01-14",
+      "actual": 5.9,
+      "predicted": 5.4
+    },
+    {
+      "park_code": "sagu",
+      "date": "2024-09-17",
+      "actual": 30.8,
+      "predicted": 32.3
+    },
+    {
+      "park_code": "bisc",
+      "date": "2024-03-22",
+      "actual": 24.3,
+      "predicted": 27.1
+    },
+    {
+      "park_code": "wica",
+      "date": "2024-06-21",
+      "actual": 22.0,
+      "predicted": 25.7
+    },
+    {
+      "park_code": "wica",
+      "date": "2024-11-09",
+      "actual": 6.2,
+      "predicted": 8.8
+    },
+    {
+      "park_code": "dena",
+      "date": "2024-07-08",
+      "actual": 14.7,
+      "predicted": 17.9
+    },
+    {
+      "park_code": "glac",
+      "date": "2025-11-22",
+      "actual": 8.0,
+      "predicted": 2.6
+    },
+    {
+      "park_code": "yell",
+      "date": "2024-08-29",
+      "actual": 18.8,
+      "predicted": 20.6
+    },
+    {
+      "park_code": "gaar",
+      "date": "2024-12-05",
+      "actual": -5.6,
+      "predicted": -15.9
+    },
+    {
+      "park_code": "bibe",
+      "date": "2024-10-27",
+      "actual": 29.7,
+      "predicted": 24.5
+    },
+    {
+      "park_code": "acad",
+      "date": "2024-09-16",
+      "actual": 22.6,
+      "predicted": 19.4
+    },
+    {
+      "park_code": "cany",
+      "date": "2025-11-05",
+      "actual": 23.0,
+      "predicted": 13.3
+    },
+    {
+      "park_code": "shen",
+      "date": "2024-12-09",
+      "actual": 11.2,
+      "predicted": 4.0
+    },
+    {
+      "park_code": "lacl",
+      "date": "2024-11-27",
+      "actual": -8.0,
+      "predicted": -1.8
+    },
+    {
+      "park_code": "drto",
+      "date": "2025-02-18",
+      "actual": 22.9,
+      "predicted": 22.7
+    },
+    {
+      "park_code": "acad",
+      "date": "2024-11-12",
+      "actual": 9.5,
+      "predicted": 8.3
+    },
+    {
+      "park_code": "grsa",
+      "date": "2025-10-25",
+      "actual": 11.7,
+      "predicted": 11.7
+    },
+    {
+      "park_code": "deva",
+      "date": "2024-09-23",
+      "actual": 38.3,
+      "predicted": 35.8
+    },
+    {
+      "park_code": "blca",
+      "date": "2024-05-01",
+      "actual": 13.9,
+      "predicted": 13.9
+    },
+    {
+      "park_code": "drto",
+      "date": "2025-01-29",
+      "actual": 20.2,
+      "predicted": 22.4
+    },
+    {
+      "park_code": "maca",
+      "date": "2024-04-06",
+      "actual": 14.1,
+      "predicted": 17.9
+    },
+    {
+      "park_code": "mora",
+      "date": "2024-02-29",
+      "actual": -2.3,
+      "predicted": -1.0
+    },
+    {
+      "park_code": "bibe",
+      "date": "2025-11-16",
+      "actual": 28.7,
+      "predicted": 21.1
+    },
+    {
+      "park_code": "ever",
+      "date": "2024-01-08",
+      "actual": 24.2,
+      "predicted": 23.6
+    },
+    {
+      "park_code": "arch",
+      "date": "2025-05-17",
+      "actual": 29.0,
+      "predicted": 26.8
+    },
+    {
+      "park_code": "blca",
+      "date": "2024-09-10",
+      "actual": 25.3,
+      "predicted": 22.7
+    },
+    {
+      "park_code": "mora",
+      "date": "2024-06-24",
+      "actual": 14.2,
+      "predicted": 15.5
+    },
+    {
+      "park_code": "care",
+      "date": "2025-05-10",
+      "actual": 26.8,
+      "predicted": 21.8
+    },
+    {
+      "park_code": "mora",
+      "date": "2024-04-13",
+      "actual": 7.7,
+      "predicted": 3.0
+    },
+    {
+      "park_code": "yell",
+      "date": "2025-03-12",
+      "actual": 4.9,
+      "predicted": -0.7
+    },
+    {
+      "park_code": "blca",
+      "date": "2024-06-12",
+      "actual": 30.1,
+      "predicted": 23.8
+    },
+    {
+      "park_code": "grsm",
+      "date": "2025-03-06",
+      "actual": -4.4,
+      "predicted": 5.0
+    },
+    {
+      "park_code": "romo",
+      "date": "2024-01-02",
+      "actual": 2.5,
+      "predicted": -0.8
+    },
+    {
+      "park_code": "neri",
+      "date": "2024-09-03",
+      "actual": 22.8,
+      "predicted": 24.6
+    },
+    {
+      "park_code": "sagu",
+      "date": "2025-07-13",
+      "actual": 37.0,
+      "predicted": 36.2
+    },
+    {
+      "park_code": "isro",
+      "date": "2024-12-30",
+      "actual": 0.7,
+      "predicted": -3.7
+    },
+    {
+      "park_code": "blca",
+      "date": "2024-06-14",
+      "actual": 21.2,
+      "predicted": 24.2
+    },
+    {
+      "park_code": "jeff",
+      "date": "2024-02-24",
+      "actual": 8.8,
+      "predicted": 9.1
+    },
+    {
+      "park_code": "gaar",
+      "date": "2024-05-14",
+      "actual": 2.1,
+      "predicted": 4.4
+    },
+    {
+      "park_code": "lavo",
+      "date": "2025-10-11",
+      "actual": 3.7,
+      "predicted": 14.0
+    },
+    {
+      "park_code": "voya",
+      "date": "2024-04-28",
+      "actual": 9.1,
+      "predicted": 12.5
+    },
+    {
+      "park_code": "grsa",
+      "date": "2024-01-05",
+      "actual": -4.5,
+      "predicted": -1.2
+    },
+    {
+      "park_code": "noca",
+      "date": "2024-10-23",
+      "actual": 10.7,
+      "predicted": 12.9
+    },
+    {
+      "park_code": "badl",
+      "date": "2024-12-20",
+      "actual": 5.1,
+      "predicted": 2.3
+    },
+    {
+      "park_code": "zion",
+      "date": "2024-08-18",
+      "actual": 30.0,
+      "predicted": 33.3
+    },
+    {
+      "park_code": "grsm",
+      "date": "2025-02-08",
+      "actual": 11.3,
+      "predicted": 2.2
+    },
+    {
+      "park_code": "pinn",
+      "date": "2025-07-31",
+      "actual": 31.2,
+      "predicted": 34.0
+    },
+    {
+      "park_code": "glac",
+      "date": "2025-01-25",
+      "actual": -3.5,
+      "predicted": -1.3
+    },
+    {
+      "park_code": "isro",
+      "date": "2024-01-02",
+      "actual": 0.8,
+      "predicted": -3.9
+    },
+    {
+      "park_code": "chis",
+      "date": "2025-05-31",
+      "actual": 22.1,
+      "predicted": 17.1
+    },
+    {
+      "park_code": "drto",
+      "date": "2025-01-13",
+      "actual": 23.7,
+      "predicted": 22.6
+    },
+    {
+      "park_code": "yell",
+      "date": "2025-11-18",
+      "actual": 3.6,
+      "predicted": -1.1
+    },
+    {
+      "park_code": "badl",
+      "date": "2024-09-24",
+      "actual": 24.6,
+      "predicted": 22.6
+    },
+    {
+      "park_code": "wrst",
+      "date": "2025-07-08",
+      "actual": 14.3,
+      "predicted": 17.4
+    },
+    {
+      "park_code": "blca",
+      "date": "2024-09-12",
+      "actual": 24.3,
+      "predicted": 22.3
+    },
+    {
+      "park_code": "zion",
+      "date": "2025-05-12",
+      "actual": 30.2,
+      "predicted": 24.7
+    },
+    {
+      "park_code": "blca",
+      "date": "2024-07-20",
+      "actual": 28.9,
+      "predicted": 27.7
+    },
+    {
+      "park_code": "drto",
+      "date": "2024-08-18",
+      "actual": 28.9,
+      "predicted": 29.6
+    },
+    {
+      "park_code": "grca",
+      "date": "2025-04-20",
+      "actual": 15.8,
+      "predicted": 15.2
+    },
+    {
+      "park_code": "blca",
+      "date": "2025-02-11",
+      "actual": 3.2,
+      "predicted": 1.0
+    },
+    {
+      "park_code": "badl",
+      "date": "2024-07-23",
+      "actual": 34.1,
+      "predicted": 31.8
+    },
+    {
+      "park_code": "dena",
+      "date": "2024-03-24",
+      "actual": 4.3,
+      "predicted": -4.2
+    },
+    {
+      "park_code": "chir",
+      "date": "2025-12-03",
+      "actual": 13.8,
+      "predicted": 14.1
+    },
+    {
+      "park_code": "romo",
+      "date": "2025-12-23",
+      "actual": 10.0,
+      "predicted": -0.5
+    },
+    {
+      "park_code": "grte",
+      "date": "2025-05-16",
+      "actual": 9.2,
+      "predicted": 11.8
+    },
+    {
+      "park_code": "chis",
+      "date": "2025-05-28",
+      "actual": 15.4,
+      "predicted": 16.9
+    },
+    {
+      "park_code": "pefo",
+      "date": "2025-10-09",
+      "actual": 26.0,
+      "predicted": 22.5
+    },
+    {
+      "park_code": "seki",
+      "date": "2025-07-16",
+      "actual": 23.9,
+      "predicted": 24.8
+    },
+    {
+      "park_code": "npsa",
+      "date": "2024-01-16",
+      "actual": 27.8,
+      "predicted": 28.1
+    },
+    {
+      "park_code": "pinn",
+      "date": "2024-03-31",
+      "actual": 15.2,
+      "predicted": 19.0
+    },
+    {
+      "park_code": "zion",
+      "date": "2025-03-03",
+      "actual": 6.4,
+      "predicted": 12.0
+    },
+    {
+      "park_code": "grba",
+      "date": "2025-10-24",
+      "actual": 13.1,
+      "predicted": 12.2
+    },
+    {
+      "park_code": "npsa",
+      "date": "2025-11-24",
+      "actual": 29.0,
+      "predicted": 27.7
+    },
+    {
+      "park_code": "voya",
+      "date": "2024-03-09",
+      "actual": -0.7,
+      "predicted": -2.0
+    },
+    {
+      "park_code": "yell",
+      "date": "2024-06-15",
+      "actual": 17.7,
+      "predicted": 17.3
+    },
+    {
+      "park_code": "romo",
+      "date": "2024-11-16",
+      "actual": 2.2,
+      "predicted": 4.4
+    },
+    {
+      "park_code": "zion",
+      "date": "2024-05-12",
+      "actual": 26.6,
+      "predicted": 25.0
+    },
+    {
+      "park_code": "olym",
+      "date": "2025-09-21",
+      "actual": 16.3,
+      "predicted": 19.7
+    },
+    {
+      "park_code": "redw",
+      "date": "2024-09-21",
+      "actual": 22.1,
+      "predicted": 20.2
+    },
+    {
+      "park_code": "grba",
+      "date": "2024-05-03",
+      "actual": 11.4,
+      "predicted": 14.5
+    },
+    {
+      "park_code": "drto",
+      "date": "2024-05-28",
+      "actual": 29.7,
+      "predicted": 27.3
+    },
+    {
+      "park_code": "indu",
+      "date": "2024-08-22",
+      "actual": 23.7,
+      "predicted": 26.1
+    },
+    {
+      "park_code": "gumo",
+      "date": "2025-06-11",
+      "actual": 26.7,
+      "predicted": 29.0
+    },
+    {
+      "park_code": "care",
+      "date": "2024-01-27",
+      "actual": 5.6,
+      "predicted": 3.1
+    },
+    {
+      "park_code": "cave",
+      "date": "2024-06-09",
+      "actual": 33.9,
+      "predicted": 32.6
+    },
+    {
+      "park_code": "bisc",
+      "date": "2024-04-19",
+      "actual": 28.1,
+      "predicted": 28.2
+    },
+    {
+      "park_code": "maca",
+      "date": "2024-01-11",
+      "actual": 11.3,
+      "predicted": 7.5
+    },
+    {
+      "park_code": "whsa",
+      "date": "2024-06-15",
+      "actual": 36.7,
+      "predicted": 33.9
+    },
+    {
+      "park_code": "meve",
+      "date": "2025-03-01",
+      "actual": 14.8,
+      "predicted": 5.2
+    },
+    {
+      "park_code": "wrst",
+      "date": "2025-06-08",
+      "actual": 10.3,
+      "predicted": 14.3
+    },
+    {
+      "park_code": "lacl",
+      "date": "2025-09-09",
+      "actual": 14.0,
+      "predicted": 12.8
+    },
+    {
+      "park_code": "cong",
+      "date": "2024-02-23",
+      "actual": 21.3,
+      "predicted": 17.0
+    },
+    {
+      "park_code": "hosp",
+      "date": "2025-05-28",
+      "actual": 25.6,
+      "predicted": 28.0
+    },
+    {
+      "park_code": "wrst",
+      "date": "2025-02-28",
+      "actual": 2.4,
+      "predicted": -6.3
+    },
+    {
+      "park_code": "voya",
+      "date": "2024-03-05",
+      "actual": 0.0,
+      "predicted": -3.0
+    },
+    {
+      "park_code": "shen",
+      "date": "2024-04-12",
+      "actual": 11.9,
+      "predicted": 12.5
+    }
+  ]
+}

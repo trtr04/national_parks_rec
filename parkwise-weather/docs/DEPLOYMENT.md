@@ -78,8 +78,9 @@ SQLite and PostgreSQL, a check that the committed model loads, and the frontend 
    python -m scripts.copy_to_postgres --target "PASTE-THE-NEON-URL-HERE"
    ```
 
-   It creates the tables, then upserts 63 parks and 253,134 days of weather. It's safe to re-run,
-   for example after loading more data locally.
+   It creates the tables, then upserts 63 parks, 253,134 days of weather and the park features
+   used by Find a park (run `python -m scripts.load_park_features` locally first). It's safe to
+   re-run, for example after loading more data locally.
 
 4. Optional check that the data arrived (prints `Result: PASS` against Neon):
 
@@ -168,7 +169,7 @@ Vercel site call your API.
 | --- | --- |
 | Code | Push to `main`. Render and Vercel both redeploy automatically. |
 | The model | `python -m scripts.train_models` locally, commit `trained_models/`, push. The API picks up the new file on deploy. |
-| Weather data | Load it locally, then `python -m scripts.copy_to_postgres --target "NEON-URL"` again. |
+| Weather data or park features | Load it locally, then `python -m scripts.copy_to_postgres --target "NEON-URL"` again. |
 | scikit-learn version | Change the pin in `backend/requirements.txt`, retrain, commit both. CI fails if the committed model was trained with a different version. |
 
 ## Troubleshooting

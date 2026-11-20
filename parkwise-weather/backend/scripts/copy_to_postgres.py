@@ -23,14 +23,14 @@ from sqlalchemy.orm import Session
 
 from app.config import get_settings
 from app.database.connection import Base, build_engine, normalize_database_url
-from app.database.models import Park, WeatherHistory
+from app.database.models import Park, ParkFeatures, WeatherHistory
 from app.database.upsert import upsert_rows
 
 logger = logging.getLogger("parkwise.copy")
 
 # 5,000 rows x 8 columns stays well under PostgreSQL's 65,535 parameters per statement.
 BATCH_ROWS = 5000
-TABLES = [(Park, ["park_code"]), (WeatherHistory, ["park_code", "date"])]
+TABLES = [(Park, ["park_code"]), (WeatherHistory, ["park_code", "date"]), (ParkFeatures, ["park_code"])]
 
 
 def redact(url: str) -> str:
